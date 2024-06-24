@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { AgentInterface } from 'src/dto/agent.dto';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class AgentService {
         email: true,
       },
     });
-    return agents;
+    return { data: agents };
   }
 
   async getAgent({ id }: { id: string }) {
@@ -31,6 +32,27 @@ export class AgentService {
         email: true,
       },
     });
-    return agent;
+    return { data: agent };
+  }
+
+  async updateAgent({ id, ...agentUpdate }: { id: string } & AgentInterface) {
+    const updatedAgent = await this.prismaservice.agents.update({
+      where: {
+        id,
+      },
+      data: {
+        ...agentUpdate,
+      },
+    });
+    return updatedAgent;
+  }
+
+  async deleteAgent({ id }: { id: string }) {
+    await this.prismaservice.agents.delete({
+      where: {
+        id,
+      },
+    });
+    return { message: 'Agent supprimé avec success ' };
   }
 }
