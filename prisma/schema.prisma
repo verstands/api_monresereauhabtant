@@ -24,7 +24,7 @@ model Agents {
   appels Appels[]
   dossiers Dossiers[]
   commentaires Commentaires[]
-
+  agents Accesapplications[]
 }
  model Roles {
   id    String @id @default(cuid())
@@ -45,10 +45,12 @@ model Sousmenus {
 
 model Agendas {
   id    String @id @default(cuid())
-  id_user   Agents @relation(fields: [id], references: [id])
+  id_user   String
   info   String
   zone   String
   telephone   String
+
+  agents Agents @relation(fields: [id_user], references: [id])
 }
 
 model TypeProduits {
@@ -116,6 +118,11 @@ model Villes {
   nom   String
 }
 
+model Archivages {
+  id    String @id @default(cuid())
+  nom   String
+}
+
 model TypeChauffages {
   id    String @id @default(cuid())
   intitule   String
@@ -145,4 +152,42 @@ model Questions {
 model Conclusions {
   id    String @id @default(cuid())
   conteneu   String
+}
+
+model Status {
+  id    String @id @default(cuid())
+  nom  String
+}
+
+model Directions {
+  id    String @id @default(cuid())
+  nom  String
+}
+
+model Installateurs {
+  id    String @id @default(cuid())
+  nom  String
+}
+
+model Invalidites {
+  id    String @id @default(cuid())
+  nom  String
+}
+model Applications {
+  id    String @id @default(cuid())
+  titre   String
+  image   String
+  lien   String
+  application Accesapplications[]
+
+}
+
+model Accesapplications {
+  id    String @id @default(cuid())
+  id_user   String
+  id_application String
+
+  agents Agents @relation(fields: [id_user], references: [id])
+  application Applications @relation(fields: [id_application], references: [id])
+
 }

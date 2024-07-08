@@ -12,15 +12,15 @@ export class AuthController {
     return await this.authservice.login(authBody);
   }
 
+  @Post()
+  async createAgent(@Body() agentinfrface: AgentInterface){
+    return await this.authservice.create(agentinfrface); 
+  }
+
   @UseGuards(JwtAuthGuard)
-  @Get()
+  @Get() 
   async authenticate(@Request() request){
     console.log(request.user);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  async createAgent(@Body() agentinfrface: AgentInterface){
-    return await this.authservice.create(agentinfrface);
-  }
 }

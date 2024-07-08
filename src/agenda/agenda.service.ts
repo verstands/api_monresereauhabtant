@@ -7,7 +7,11 @@ export class AgendaService {
   constructor(private readonly prismaservice: PrismaService) {}
 
   async getAgendas() {
-    const agenda = await this.prismaservice.agendas.findMany({});
+    const agenda = await this.prismaservice.agendas.findMany({
+      include: {
+        agents: true,
+      },
+    });
     return { data: agenda };
   }
 
@@ -15,6 +19,9 @@ export class AgendaService {
     const agenda = await this.prismaservice.agendas.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        agents: true,
       },
     });
     return { data: agenda };
@@ -44,6 +51,7 @@ export class AgendaService {
   async create(agendadto: AgendaDto) {
     const createAgent = await this.prismaservice.agendas.create({
       data: {
+        id_user: agendadto.id_user,
         info: agendadto.info,
         zone: agendadto.zone,
         telephone: agendadto.telephone,

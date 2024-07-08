@@ -20,10 +20,44 @@ import { SousmenuModule } from './sousmenu/sousmenu.module';
 import { TypechauffageModule } from './typechauffage/typechauffage.module';
 import { TypeproduitModule } from './typeproduit/typeproduit.module';
 import { TyperevenuModule } from './typerevenu/typerevenu.module';
+import { ApplicationModule } from './application/application.module';
+import { AccesapplicationModule } from './accesapplication/accesapplication.module';
+import { VilleModule } from './ville/ville.module';
+import { StatusModule } from './status/status.module';
+import { InstallateurModule } from './installateur/installateur.module';
+import { InvaliditeModule } from './invalidite/invalidite.module';
+import { ArchivageModule } from './archivage/archivage.module';
 
 @Module({
-  imports: [AgentModule, AuthModule, AgendaModule, AppelModule, CapamgneModule, CarteModule, CommentaireModule, ConclusionModule, ConfigurationModule, DossierModule, MenuModule, PresentationModule, ProvenanceModule, QuestionModule, RaisonModule, RoleModule, ScriptModule, SousmenuModule, TypechauffageModule, TypeproduitModule, TyperevenuModule],
-  controllers: [],
-  providers: [],
+  imports: [
+    AgentModule,
+    AuthModule,
+    AgendaModule,
+    AppelModule,
+    CapamgneModule,
+    CarteModule,
+    CommentaireModule,
+    ConclusionModule,
+    ConfigurationModule,
+    DossierModule,
+    MenuModule,
+    PresentationModule,
+    ProvenanceModule,
+    QuestionModule,
+    RaisonModule,
+    RoleModule,
+    ScriptModule,
+    SousmenuModule,
+    TypechauffageModule,
+    TypeproduitModule,
+    TyperevenuModule,
+    ApplicationModule,
+    AccesapplicationModule,
+    VilleModule,
+    StatusModule,
+    InstallateurModule,
+    InvaliditeModule,
+    ArchivageModule,
+  ],
 })
 export class AppModule {}

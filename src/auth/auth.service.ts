@@ -34,7 +34,25 @@ export class AuthService {
       throw new HttpException('Le mot de passe n\'est pas valide', HttpStatus.CONFLICT);
 
     }
-    return this.authenticateUser(existeEmail.id);
+
+    const application = await this.prismaservice.accesapplications.findMany({
+        where: {
+          id_user: existeEmail.id
+        },
+        include: {
+          application: true,
+          agents: true
+        }
+      });   
+    
+      const payload: UserPayload = { userid: existeEmail.id };
+      const accessToken = await this.jwtService.sign(payload);
+    
+      return {
+        access_token: accessToken,
+        application: application,
+        agent: existeEmail
+      };
   }
 
   private async hasPassword(password: string) {

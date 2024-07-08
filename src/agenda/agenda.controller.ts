@@ -30,17 +30,17 @@ export class AgendaController {
   }
 
   @Put(':id')
-  updateAgent(@Param('id') id: string, @Body() agentUpdate: AgendaDto) {
+  updateagenda(@Param('id') id: string, @Body() agentUpdate: AgendaDto) {
     return this.agendaService.updateAgenda({ id, ...agentUpdate });
   }
 
   @Delete(':id')
-  deleteAgent(@Param('id') id: string) {
+  deleteAgenda(@Param('id') id: string) {
     return this.agendaService.deleteAgenda({ id });
   }
 
   @Post()
-  async createAgent(@Body() agendadto: AgendaDto){
+  async createAgenda(@Body() agendadto: AgendaDto){
     return await this.agendaService.create(agendadto);
   }
 }
