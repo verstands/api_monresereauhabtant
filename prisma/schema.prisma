@@ -25,10 +25,13 @@ model Agents {
   dossiers Dossiers[]
   commentaires Commentaires[]
   agents Accesapplications[]
+  agentrole Accesroles[]
 }
  model Roles {
   id    String @id @default(cuid())
   initule   String
+  role Accesroles[]
+
 }
 
 model Menus {
@@ -83,7 +86,7 @@ model Raisons {
 model Scripts {
   id    String @id @default(cuid())
   titre   String
-  contenue   String
+  contenue   String @db.Text()
   position   String
 }
 
@@ -189,5 +192,15 @@ model Accesapplications {
 
   agents Agents @relation(fields: [id_user], references: [id])
   application Applications @relation(fields: [id_application], references: [id])
+
+}
+
+model Accesroles {
+  id    String @id @default(cuid())
+  id_user   String
+  id_role String
+
+  agentrole Agents @relation(fields: [id_user], references: [id])
+  role Roles @relation(fields: [id_role], references: [id])
 
 }

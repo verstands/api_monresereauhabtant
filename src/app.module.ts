@@ -27,6 +27,7 @@ import { StatusModule } from './status/status.module';
 import { InstallateurModule } from './installateur/installateur.module';
 import { InvaliditeModule } from './invalidite/invalidite.module';
 import { ArchivageModule } from './archivage/archivage.module';
+import { AcceroleModule } from './accerole/accerole.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { ArchivageModule } from './archivage/archivage.module';
     InstallateurModule,
     InvaliditeModule,
     ArchivageModule,
+    AcceroleModule,
   ],
 })
 export class AppModule {}

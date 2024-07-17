@@ -44,6 +44,16 @@ export class AuthService {
           agents: true
         }
       });   
+
+      const role = await this.prismaservice.accesroles.findMany({
+          where: {
+            id_user: existeEmail.id
+          },
+          include: {
+            role: true,
+            agentrole: true
+          }
+      })
     
       const payload: UserPayload = { userid: existeEmail.id };
       const accessToken = await this.jwtService.sign(payload);
@@ -51,6 +61,7 @@ export class AuthService {
       return {
         access_token: accessToken,
         application: application,
+        role : role,
         agent: existeEmail
       };
   }

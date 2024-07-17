@@ -17,7 +17,7 @@ export class ArchivageController {
     getApplication(@Param('id') id: string) {
       return this.archivageservice.getId({
         id,
-      });
+      }); 
     }
   
     @Put(':id')
