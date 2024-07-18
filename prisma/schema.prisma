@@ -19,7 +19,9 @@ model Agents {
   prenom   String
   mdp   String
   statut   String
+  statuts   String
   email String @unique
+  agentfonction Fonctions @relation(fields: [statut], references: [id])
   agendas Agendas[]
   appels Appels[]
   dossiers Dossiers[]
@@ -31,6 +33,13 @@ model Agents {
   id    String @id @default(cuid())
   initule   String
   role Accesroles[]
+
+}
+
+ model Fonctions {
+  id    String @id @default(cuid())
+  initule   String
+  agentfonction Agents[]
 
 }
 

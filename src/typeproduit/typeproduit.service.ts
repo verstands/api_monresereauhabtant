@@ -7,7 +7,11 @@ export class TypeproduitService {
     constructor(private readonly prismaservice: PrismaService) {}
 
     async get() {
-      const data = await this.prismaservice.typeProduits.findMany({});
+      const data = await this.prismaservice.typeProduits.findMany({
+        orderBy: {
+          id : 'desc'
+        }
+      });
       return { data: data };
     }
   
