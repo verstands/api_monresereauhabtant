@@ -7,7 +7,14 @@ export class CapamgneService {
   constructor(private readonly prismaservice: PrismaService) {}
 
   async getcampagnes() {
-    const campagne = await this.prismaservice.capamgnes.findMany({});
+    const campagne = await this.prismaservice.capamgnes.findMany({
+      orderBy: {
+        "id" : "desc"
+      },
+      include : {
+        "produit" : true
+      }
+    });
     return { data: campagne };
   }
 
@@ -43,10 +50,7 @@ export class CapamgneService {
 
   async create(campagnedto: CapamgneDto) {
     const createAgent = await this.prismaservice.capamgnes.create({
-      data: {
-        titre:  campagnedto.titre,
-        file: campagnedto.file
-      },
+      data: campagnedto,
     });
     return createAgent;
   }

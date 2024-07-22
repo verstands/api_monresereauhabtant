@@ -6,6 +6,11 @@ export class AgentInterface {
   nom: string;
 
   @IsNotEmpty({
+    message: 'Le champ nom est obligatoire',
+  })
+  id_fonction: string
+
+  @IsNotEmpty({
     message: 'Le champ prénom est obligatoire',
   })
   prenom: string;

@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
-import { ScriptService } from './script.service';
-import { ScriptDto } from 'src/dto/script.dto';
+import { FonctionService } from './fonction.service';
+import { FonctionDto } from 'src/dto/fonction.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
-@Controller('script')
-export class ScriptController {
-    constructor(private readonly roleservice : ScriptService) {}
+@Controller('fonction')
+export class FonctionController {
+    constructor(private readonly roleservice : FonctionService) {}
 
     @Get()
     get() {
@@ -19,13 +19,6 @@ export class ScriptController {
         id,
       });
     }
-
-    @Get('/produit/:id_produit')
-    getProduitId(@Param('id_produitd') id_produit: string) {
-      return this.roleservice.getIdProduit({
-        id_produit,
-      });
-    }
    
   
     @Delete(':id')
@@ -34,7 +27,7 @@ export class ScriptController {
     }
   
     @Post()
-    async createAgenda(@Body() agendadto: ScriptDto) {
+    async createAgenda(@Body() agendadto: FonctionDto) {
       return await this.roleservice.create(agendadto);
     }
 }

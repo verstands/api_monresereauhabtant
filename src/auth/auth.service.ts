@@ -102,8 +102,9 @@ export class AuthService {
         nom: agentinfrface.nom,
         prenom: agentinfrface.prenom,
         statut: agentinfrface.statut,
+        id_fonction : agentinfrface.id_fonction
       },
     });
     return createAgent;
-  }
+  } 
 }

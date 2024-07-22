@@ -18,29 +18,29 @@ model Agents {
   nom   String
   prenom   String
   mdp   String
+  id_fonction   String
   statut   String
-  statuts   String
   email String @unique
-  agentfonction Fonctions @relation(fields: [statut], references: [id])
+  fonction Fonctions @relation(fields: [id_fonction], references: [id])
   agendas Agendas[]
   appels Appels[]
   dossiers Dossiers[]
   commentaires Commentaires[]
   agents Accesapplications[]
   agentrole Accesroles[]
+  agentprospect Prospects[]
+  agentpospect Pospects[]
 }
  model Roles {
   id    String @id @default(cuid())
   initule   String
   role Accesroles[]
-
 }
 
  model Fonctions {
   id    String @id @default(cuid())
   initule   String
-  agentfonction Agents[]
-
+  agents Agents[]
 }
 
 model Menus {
@@ -70,11 +70,28 @@ model TypeProduits {
   image   String
   titre   String
   description   String  
+
+  id_produit Capamgnes[]
+  pospects Pospects[]
+  produit Scripts[]
+
 }
 model Capamgnes {
   id    String @id @default(cuid())
   titre   String
-  file   String
+  id_produit String
+  produit TypeProduits @relation(fields: [id_produit], references: [id])
+  statut  String
+  nouveau  String
+  nrp  String
+  rdv  String
+  nonvalide  String
+  nrptermine  String
+  total  String
+  distribue  String
+  restant  String
+
+  pospects Pospects[]
 }
 
 model Appels {
@@ -97,6 +114,9 @@ model Scripts {
   titre   String
   contenue   String @db.Text()
   position   String
+
+  id_produit  TypeProduits @relation(fields: [position], references: [id])
+
 }
 
 model Provenances {
@@ -138,11 +158,14 @@ model Archivages {
 model TypeChauffages {
   id    String @id @default(cuid())
   intitule   String
+
+  typechauffage Prospects[]
 }
 
 model TypeRevenus {
   id    String @id @default(cuid())
   intitule   String
+  typerevenu Prospects[]
 }
 
 model Commentaires {
@@ -212,4 +235,48 @@ model Accesroles {
   agentrole Agents @relation(fields: [id_user], references: [id])
   role Roles @relation(fields: [id_role], references: [id])
 
+}
+
+
+model Prospects {
+  id               String    @id @default(cuid())
+  id_user          String
+  nom              String
+  prenom           String
+  email            String
+  telephone        String
+  adresse          String
+  ville            String
+  codepostal       String
+  surface          String
+  id_typechauffage String
+  id_typerevenu    String
+
+
+  agentprospect    Agents     @relation(fields: [id_user], references: [id])
+  typechauffage    TypeChauffages @relation(fields: [id_typechauffage], references: [id])
+  typerevenu       TypeRevenus    @relation(fields: [id_typerevenu], references: [id])
+}
+
+
+model Pospects {
+  id               String    @id @default(cuid())
+  id_user          String
+  nom              String
+  code              String
+  prenom           String
+  email            String
+  telephone        String
+  adresse          String
+  ville            String
+  codepostal       String
+  surface          String
+  id_typechauffage String
+  id_typerevenu    String
+  id_campagne      String
+  id_produit       String
+
+  capagnepospect   Capamgnes    @relation(fields: [id_campagne], references: [id])
+  produitpospect   TypeProduits    @relation(fields: [id_produit], references: [id])
+  agentpospect    Agents  @relation(fields: [id_user], references: [id])
 }

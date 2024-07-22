@@ -10,6 +10,9 @@ export class ScriptService {
       const data = await this.prismaservice.scripts.findMany({
         orderBy: {
             id: 'desc'
+          },
+          include : {
+          id_produit : true
           } 
       },
     ); 
@@ -21,6 +24,18 @@ export class ScriptService {
         where: {
           id: id,
         },
+      });
+      return { data: data };
+    }
+
+    async getIdProduit({ id_produit }: { id_produit: string }) {
+      const data = await this.prismaservice.scripts.findMany({
+        where: {
+          position: id_produit,
+        },
+        include: {
+          id_produit : true
+        }
       });
       return { data: data };
     }
@@ -48,11 +63,7 @@ export class ScriptService {
 
     async create(applicationdto: ScriptDto) {
         const create = await this.prismaservice.scripts.create({
-          data: {
-            titre: applicationdto.titre,
-            contenue: applicationdto.contenu,
-            position: applicationdto.position,
-          },
+          data: applicationdto 
         });
         return create;
       }
