@@ -1,22 +1,27 @@
 import { IsNotEmpty } from 'class-validator';
 export class AgendaDto {
   @IsNotEmpty({
-    message: 'Le champ info est obligatoire',
+    message: 'Le champ prospect est obligatoire',
   })
-  info: string;
+  id_postect: string;
 
   @IsNotEmpty({
-    message: 'Le champ zone est obligatoire',
-  })
-  zone: string;
-
-  @IsNotEmpty({
-    message: 'Le champ telephone est obligatoire',
-  })
-  telephone: string;
-
-  @IsNotEmpty({
-    message: 'Le champ id_user est obligatoire',
+    message: 'Le champ user est obligatoire',
   })
   id_user: string;
+
+  @IsNotEmpty({
+    message: 'Le champ user est obligatoire',
+  })
+  title: string;
+
+  @IsNotEmpty({
+    message: 'Le champ user est obligatoire',
+  })
+  start: string;
+  
+  @IsNotEmpty({
+    message: 'Le champ user est obligatoire',
+  })
+  end: string;
 }

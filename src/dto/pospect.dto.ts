@@ -39,6 +39,12 @@ export class PospectDto {
 
   @IsOptional()
   id_produit: string;
+  
+  @IsOptional()
+  status: string
+
+  @IsOptional()
+  typelead: string
 
   @IsEmail(
     {},

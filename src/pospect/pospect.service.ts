@@ -19,6 +19,24 @@ export class PospectService {
       });
       return { data: data };
     }
+
+    async getIdOneProspect() {
+      const data = await this.prismaservice.pospects.findFirst({
+        where: {
+          status: '0',
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        include: {
+          agentpospect: true,
+          capagnepospect: true,
+          produitpospect: true,
+        },
+      });
+    
+      return { data };
+    }
   
     async getId({ id }: { id: string }) {
       const data = await this.prismaservice.pospects.findUnique({
@@ -44,6 +62,90 @@ export class PospectService {
         },
       });
       return update;
+    }
+
+    async updateNRP({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "2"
+        },
+      });
+      return {message  : 'prospect Ne repond pas'};
+    }
+
+    async updateRDV({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "1"
+        },
+      });
+      return {message  : 'prospect rendez-vous'};
+    }
+
+    async updateNonValide({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "3"
+        },
+      });
+      return {message  : 'prospect Non valide'};
+    }
+
+    async updatePasInteresse({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "4"
+        },
+      });
+      return {message  : 'prospect Pas intéressé'};
+    }
+
+    async updateNPP({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "5"
+        },
+      });
+      return {message  : 'prospect N\'est pas appeller'};
+    }
+
+    async updateMN({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "6"
+        },
+      });
+      return {message  : 'prospect Mauvais numero'};
+    }
+
+    async updateFL({ id }: { id: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: "7"
+        },
+      });
+      return {message  : 'prospect Faux lead'};
     }
   
     async delete({ id }: { id: string }) {

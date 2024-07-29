@@ -58,11 +58,13 @@ model Sousmenus {
 model Agendas {
   id    String @id @default(cuid())
   id_user   String
-  info   String
-  zone   String
-  telephone   String
-
+  id_postect   String
+  title   String
+  start   String
+  end   String
+  
   agents Agents @relation(fields: [id_user], references: [id])
+  pospect Pospects @relation(fields: [id_postect], references: [id])
 }
 
 model TypeProduits {
@@ -170,8 +172,11 @@ model TypeRevenus {
 
 model Commentaires {
   id    String @id @default(cuid())
-  message   String
-  id_user   Agents @relation(fields: [id], references: [id])
+  message   String @db.Text()
+  id_user String
+  id_prospect String
+  user Agents @relation(fields: [id_user], references: [id])
+  pospect Pospects @relation(fields: [id_prospect], references: [id])
 }
 
 model Presentations {
@@ -271,10 +276,15 @@ model Pospects {
   ville            String
   codepostal       String
   surface          String
+  status           String
   id_typechauffage String
   id_typerevenu    String
   id_campagne      String
   id_produit       String
+  typelead       String
+
+  pospect Agendas[]
+  commenatire Commentaires[]
 
   capagnepospect   Capamgnes    @relation(fields: [id_campagne], references: [id])
   produitpospect   TypeProduits    @relation(fields: [id_produit], references: [id])

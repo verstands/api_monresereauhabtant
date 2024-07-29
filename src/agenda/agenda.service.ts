@@ -10,6 +10,7 @@ export class AgendaService {
     const agenda = await this.prismaservice.agendas.findMany({
       include: {
         agents: true,
+        pospect : true 
       },
     });
     return { data: agenda };
@@ -50,12 +51,7 @@ export class AgendaService {
 
   async create(agendadto: AgendaDto) {
     const createAgent = await this.prismaservice.agendas.create({
-      data: {
-        id_user: agendadto.id_user,
-        info: agendadto.info,
-        zone: agendadto.zone,
-        telephone: agendadto.telephone,
-      },
+      data: agendadto
     });
     return createAgent;
   }
