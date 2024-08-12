@@ -14,237 +14,236 @@ datasource db {
 }
 
 model Agents {
-  id    String @id @default(cuid())
-  nom   String
-  prenom   String
-  mdp   String
+  id            String              @id @default(cuid())
+  nom           String
+  prenom        String
+  mdp           String
   id_fonction   String
-  statut   String
-  email String @unique
-  fonction Fonctions @relation(fields: [id_fonction], references: [id])
-  agendas Agendas[]
-  appels Appels[]
-  dossiers Dossiers[]
-  commentaires Commentaires[]
-  agents Accesapplications[]
-  agentrole Accesroles[]
+  statut        String
+  email         String              @unique
+  fonction      Fonctions           @relation(fields: [id_fonction], references: [id])
+  agendas       Agendas[]
+  appels        Appels[]
+  dossiers      Dossiers[]
+  commentaires  Commentaires[]
+  agents        Accesapplications[]
+  agentrole     Accesroles[]
   agentprospect Prospects[]
-  agentpospect Pospects[]
-}
- model Roles {
-  id    String @id @default(cuid())
-  initule   String
-  role Accesroles[]
+  agentpospect  Pospects[]
+  //agentmodel    Modelmail[]
 }
 
- model Fonctions {
-  id    String @id @default(cuid())
-  initule   String
-  agents Agents[]
+model Roles {
+  id      String       @id @default(cuid())
+  initule String
+  role    Accesroles[]
+}
+
+model Fonctions {
+  id            String      @id @default(cuid())
+  initule       String
+  agents        Agents[]
+ 
 }
 
 model Menus {
-  id    String @id @default(cuid())
-  nom   String
+  id        String      @id @default(cuid())
+  nom       String
   sousmenus Sousmenus[]
 }
 
 model Sousmenus {
-  id    String @id @default(cuid())
-  nom   String
+  id      String @id @default(cuid())
+  nom     String
   id_menu Menus  @relation(fields: [id], references: [id])
 }
 
 model Agendas {
-  id    String @id @default(cuid())
-  id_user   String
-  id_postect   String
-  title   String
-  start   String
-  end   String
-  
-  agents Agents @relation(fields: [id_user], references: [id])
+  id         String @id @default(cuid())
+  id_user    String
+  id_postect String
+  title      String
+  start      String
+  end        String
+
+  agents  Agents   @relation(fields: [id_user], references: [id])
   pospect Pospects @relation(fields: [id_postect], references: [id])
 }
 
 model TypeProduits {
-  id    String @id @default(cuid())
-  image   String
-  titre   String
-  description   String  
+  id          String @id @default(cuid())
+  image       String
+  titre       String
+  description String
 
   id_produit Capamgnes[]
-  pospects Pospects[]
-  produit Scripts[]
-
+  pospects   Pospects[]
+  produit    Scripts[]
 }
-model Capamgnes {
-  id    String @id @default(cuid())
-  titre   String
-  id_produit String
-  produit TypeProduits @relation(fields: [id_produit], references: [id])
-  statut  String
-  nouveau  String
-  nrp  String
-  rdv  String
-  nonvalide  String
-  nrptermine  String
-  total  String
-  distribue  String
-  restant  String
 
-  pospects Pospects[]
+model Capamgnes {
+  id         String       @id @default(cuid())
+  titre      String
+  id_produit String
+  produit    TypeProduits @relation(fields: [id_produit], references: [id])
+  statut     String
+  nouveau    String
+  nrp        String
+  rdv        String
+  nonvalide  String
+  nrptermine String
+  total      String
+  distribue  String
+  restant    String
+
+  pospects     Pospects[]
+  //capagnemodel Modelmail[]
 }
 
 model Appels {
-  id    String @id @default(cuid())
-  id_user   Agents @relation(fields: [id], references: [id])
-  id_capamgne  String
+  id          String @id @default(cuid())
+  id_user     Agents @relation(fields: [id], references: [id])
+  id_capamgne String
   direction   String
-  statut   String
-  dure   String
-  numero   String
+  statut      String
+  dure        String
+  numero      String
 }
 
 model Raisons {
-  id    String @id @default(cuid())
-  nom   String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model Scripts {
-  id    String @id @default(cuid())
-  titre   String
-  contenue   String @db.Text()
-  position   String
+  id       String @id @default(cuid())
+  titre    String
+  contenue String @db.Text()
+  position String
 
-  id_produit  TypeProduits @relation(fields: [position], references: [id])
-
+  id_produit TypeProduits @relation(fields: [position], references: [id])
 }
 
 model Provenances {
-  id    String @id @default(cuid())
-  nom   String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model Cartes {
-  id    String @id @default(cuid())
+  id String @id @default(cuid())
 }
 
 model Configurations {
-  id    String @id @default(cuid())
+  id String @id @default(cuid())
 }
 
-
 model Dossiers {
-  id    String @id @default(cuid())
-  nom   String
+  id        String @id @default(cuid())
+  nom       String
   adresse   String
-  telephone   String
-  date   String
-  email   String
+  telephone String
+  date      String
+  email     String
   surface   String
-  chauffage   String
+  chauffage String
   id_user   Agents @relation(fields: [id], references: [id])
 }
 
 model Villes {
-  id    String @id @default(cuid())
-  nom   String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model Archivages {
-  id    String @id @default(cuid())
-  nom   String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model TypeChauffages {
-  id    String @id @default(cuid())
-  intitule   String
+  id       String @id @default(cuid())
+  intitule String
 
   typechauffage Prospects[]
 }
 
 model TypeRevenus {
-  id    String @id @default(cuid())
+  id         String      @id @default(cuid())
   intitule   String
   typerevenu Prospects[]
 }
 
 model Commentaires {
-  id    String @id @default(cuid())
-  message   String @db.Text()
-  id_user String
+  id          String   @id @default(cuid())
+  message     String   @db.Text()
+  id_user     String
   id_prospect String
-  user Agents @relation(fields: [id_user], references: [id])
-  pospect Pospects @relation(fields: [id_prospect], references: [id])
+  user        Agents   @relation(fields: [id_user], references: [id])
+  pospect     Pospects @relation(fields: [id_prospect], references: [id])
 }
 
 model Presentations {
-  id    String @id @default(cuid())
-  conteneu   String
+  id       String @id @default(cuid())
+  conteneu String
 }
 
 model Questions {
-  id    String @id @default(cuid())
-  conteneu   String
+  id       String @id @default(cuid())
+  conteneu String
 }
 
 model Conclusions {
-  id    String @id @default(cuid())
-  conteneu   String
+  id       String @id @default(cuid())
+  conteneu String
 }
 
 model Status {
-  id    String @id @default(cuid())
-  nom  String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model Directions {
-  id    String @id @default(cuid())
-  nom  String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model Installateurs {
-  id    String @id @default(cuid())
-  nom  String
+  id  String @id @default(cuid())
+  nom String
 }
 
 model Invalidites {
-  id    String @id @default(cuid())
-  nom  String
+  id  String @id @default(cuid())
+  nom String
 }
-model Applications {
-  id    String @id @default(cuid())
-  titre   String
-  image   String
-  lien   String
-  application Accesapplications[]
 
+model Applications {
+  id          String              @id @default(cuid())
+  titre       String
+  image       String
+  lien        String
+  application Accesapplications[]
 }
 
 model Accesapplications {
-  id    String @id @default(cuid())
-  id_user   String
+  id             String @id @default(cuid())
+  id_user        String
   id_application String
 
-  agents Agents @relation(fields: [id_user], references: [id])
+  agents      Agents       @relation(fields: [id_user], references: [id])
   application Applications @relation(fields: [id_application], references: [id])
-
 }
 
 model Accesroles {
-  id    String @id @default(cuid())
-  id_user   String
+  id      String @id @default(cuid())
+  id_user String
   id_role String
 
   agentrole Agents @relation(fields: [id_user], references: [id])
-  role Roles @relation(fields: [id_role], references: [id])
-
+  role      Roles  @relation(fields: [id_role], references: [id])
 }
 
-
 model Prospects {
-  id               String    @id @default(cuid())
+  id               String @id @default(cuid())
   id_user          String
   nom              String
   prenom           String
@@ -257,18 +256,16 @@ model Prospects {
   id_typechauffage String
   id_typerevenu    String
 
-
-  agentprospect    Agents     @relation(fields: [id_user], references: [id])
-  typechauffage    TypeChauffages @relation(fields: [id_typechauffage], references: [id])
-  typerevenu       TypeRevenus    @relation(fields: [id_typerevenu], references: [id])
+  agentprospect Agents         @relation(fields: [id_user], references: [id])
+  typechauffage TypeChauffages @relation(fields: [id_typechauffage], references: [id])
+  typerevenu    TypeRevenus    @relation(fields: [id_typerevenu], references: [id])
 }
 
-
 model Pospects {
-  id               String    @id @default(cuid())
+  id               String @id @default(cuid())
   id_user          String
   nom              String
-  code              String
+  code             String
   prenom           String
   email            String
   telephone        String
@@ -277,16 +274,39 @@ model Pospects {
   codepostal       String
   surface          String
   status           String
+  statusdossier    String
   id_typechauffage String
   id_typerevenu    String
   id_campagne      String
   id_produit       String
-  typelead       String
+  typelead         String
 
-  pospect Agendas[]
+  pospect     Agendas[]
   commenatire Commentaires[]
 
-  capagnepospect   Capamgnes    @relation(fields: [id_campagne], references: [id])
-  produitpospect   TypeProduits    @relation(fields: [id_produit], references: [id])
-  agentpospect    Agents  @relation(fields: [id_user], references: [id])
+  capagnepospect Capamgnes    @relation(fields: [id_campagne], references: [id])
+  produitpospect TypeProduits @relation(fields: [id_produit], references: [id])
+  agentpospect   Agents       @relation(fields: [id_user], references: [id])
+}
+
+model Modelmail {
+  id            String @id @default(cuid())
+  id_user       String
+  active        Boolean
+  bccexp        String
+  ccexp         String
+  contenue      String @db.Text()
+  description   String @db.Text()
+  disnataireexp String
+  emailexp      String
+  fichier       String
+  nom           String
+  nomexp        String
+  id_campagne   String
+  id_fonction   String
+  sujet         String
+
+  //capagnemodel  Capamgnes @relation(fields: [id_campagne], references: [id])
+  //agentmodel    Agents    @relation(fields: [id_user], references: [id])
+  //fonctionmodel Fonctions @relation(fields: [id_fonction], references: [id])
 }

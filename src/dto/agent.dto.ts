@@ -1,12 +1,13 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 export class AgentInterface {
+  id?: string;
   @IsNotEmpty({
     message: 'Le champ nom est obligatoire',
   })
   nom: string;
 
   @IsNotEmpty({
-    message: 'Le champ nom est obligatoire',
+    message: 'Le champ role est obligatoire',
   })
   id_fonction: string
 
@@ -19,11 +20,13 @@ export class AgentInterface {
     message: 'Le champ mot de passe est obligatoire',
   })
   @MinLength(5, {
-    message: 'Votre mot de passe doit faire plus de 5 caracteres.',
+    message: 'Votre mot de passe doit faire plus de 5 caracteres. ',
   })
   mdp: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: 'Le champ statut est obligatoire',
+  })
   statut: string;
 
   @IsEmail(

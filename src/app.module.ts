@@ -30,6 +30,9 @@ import { ArchivageModule } from './archivage/archivage.module';
 import { AcceroleModule } from './accerole/accerole.module';
 import { PospectModule } from './pospect/pospect.module';
 import { FonctionModule } from './fonction/fonction.module';
+import { MailModule } from './mail/mail.module';
+import { ModelmailModule } from './modelmail/modelmail.module';
+
 
 @Module({
   imports: [
@@ -64,6 +67,8 @@ import { FonctionModule } from './fonction/fonction.module';
     AcceroleModule,
     PospectModule,
     FonctionModule,
+    MailModule,
+    ModelmailModule,
   ],
 })
 export class AppModule {}

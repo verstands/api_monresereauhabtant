@@ -7,7 +7,15 @@ export class AccesapplicationService {
     constructor(private readonly prismaservice: PrismaService) {}
 
   async getAccesApplications() {
-    const application = await this.prismaservice.accesapplications.findMany({});
+    const application = await this.prismaservice.accesapplications.findMany({
+      orderBy : {
+         id : "desc"
+      },
+      include : {
+        agents : true,
+        application : true
+      }
+    });
     return { data: application };
   }
 

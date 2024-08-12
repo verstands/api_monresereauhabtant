@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Request,
+  Patch,
+  Param,
+  Put,
+} from '@nestjs/common';
 import { AuthBody } from 'src/dto/auth-body.dto';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
@@ -13,14 +23,22 @@ export class AuthController {
   }
 
   @Post()
-  async createAgent(@Body() agentinfrface: AgentInterface){
-    return await this.authservice.create(agentinfrface); 
+  async createAgent(@Body() agentinfrface: AgentInterface) {
+    return await this.authservice.create(agentinfrface);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get() 
-  async authenticate(@Request() request){
+  @Get()
+  async authenticate(@Request() request) {
     console.log(request.user);
   }
 
+  @Put('reset-password/:email')
+  async resetPassword(
+    @Param('id') id: string,
+    @Param('email') email: string,
+    @Body('newPassword') newPassword: string,
+  ) {
+    return await this.authservice.resetAgent({ email, newPassword });
+  }
 }

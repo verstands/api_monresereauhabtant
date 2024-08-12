@@ -44,6 +44,9 @@ export class PospectDto {
   status: string
 
   @IsOptional()
+  statusdossier: string
+
+  @IsOptional()
   typelead: string
 
   @IsEmail(

@@ -12,6 +12,22 @@ export class PospectController {
     get() {
       return this.roleservice.get();
     }
+    @Get('one/one')
+    getIdOne() {
+      return this.roleservice.getIdOneProspect();
+    }
+
+    @Get('oneCampagne/oneCampagne/:id')
+    getIdOneCampagne(@Param('id') id: string) {
+      return this.roleservice.getIdOneProspectCampagne({
+        id
+      });
+    }
+
+    @Get('countNouveau/countNouveau')
+    getcountNouveau() {
+      return this.roleservice.getcountNouveau();
+    }
   
     @Get(':id')
     getApplication(@Param('id') id: string) {
@@ -20,10 +36,6 @@ export class PospectController {
       });
     }
 
-    @Get('one/one')
-    getIdOne() {
-      return this.roleservice.getIdOneProspect();
-    }
     @Put('nrp/:id')
     updatenrp(@Param('id') id: string) {
       return this.roleservice.updateNRP({ id });

@@ -20,6 +20,21 @@ export class PospectService {
       return { data: data };
     }
 
+    async getcountNouveau() {
+      const data = await this.prismaservice.pospects.count({
+        where: {
+          status : "0"
+        },
+      });
+
+      const dataNRP = await this.prismaservice.pospects.count({
+        where: {
+          status : "2"
+        },
+      });
+      return { nouveau: data, nrp : dataNRP };
+    }
+
     async getIdOneProspect() {
       const data = await this.prismaservice.pospects.findFirst({
         where: {
@@ -36,6 +51,25 @@ export class PospectService {
       });
     
       return { data };
+    }
+
+    async getIdOneProspectCampagne({ id }: { id: string }) {
+      const data = await this.prismaservice.pospects.findFirst({
+        where: {
+           id_campagne: id,
+           status: '0',
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        include: {
+          agentpospect: true,
+          capagnepospect: true,
+          produitpospect: true,
+        },
+      });
+    
+      return { data : data};
     }
   
     async getId({ id }: { id: string }) {
@@ -73,7 +107,7 @@ export class PospectService {
           status: "2"
         },
       });
-      return {message  : 'prospect Ne repond pas'};
+      return {message  : 'prospect Ne repond pas', data : update};
     }
 
     async updateRDV({ id }: { id: string }) {
@@ -85,7 +119,7 @@ export class PospectService {
           status: "1"
         },
       });
-      return {message  : 'prospect rendez-vous'};
+      return {message  : 'prospect rendez-vous' , data : update};
     }
 
     async updateNonValide({ id }: { id: string }) {
@@ -97,7 +131,7 @@ export class PospectService {
           status: "3"
         },
       });
-      return {message  : 'prospect Non valide'};
+      return {message  : 'prospect Non valide', data : update};
     }
 
     async updatePasInteresse({ id }: { id: string }) {
@@ -109,7 +143,7 @@ export class PospectService {
           status: "4"
         },
       });
-      return {message  : 'prospect Pas intéressé'};
+      return {message  : 'prospect Pas intéressé', data : update};
     }
 
     async updateNPP({ id }: { id: string }) {
@@ -121,7 +155,7 @@ export class PospectService {
           status: "5"
         },
       });
-      return {message  : 'prospect N\'est pas appeller'};
+      return {message  : 'prospect N\'est pas appeller', data : update};
     }
 
     async updateMN({ id }: { id: string }) {
@@ -133,7 +167,7 @@ export class PospectService {
           status: "6"
         },
       });
-      return {message  : 'prospect Mauvais numero'};
+      return {message  : 'prospect Mauvais numero' , data : update};
     }
 
     async updateFL({ id }: { id: string }) {
@@ -145,7 +179,7 @@ export class PospectService {
           status: "7"
         },
       });
-      return {message  : 'prospect Faux lead'};
+      return {message  : 'prospect Faux lead' , data : update};
     }
   
     async delete({ id }: { id: string }) {

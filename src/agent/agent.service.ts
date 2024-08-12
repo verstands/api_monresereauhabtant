@@ -8,13 +8,13 @@ export class AgentService {
 
   async getAgents() {
     const agents = await this.prismaservice.agents.findMany({
-      select: {
-        id: true,
-        nom: true,
-        prenom: true,
-        statut: true,
-        email: true,
+      
+      orderBy : {
+        id : "desc"
       },
+      include : {
+        fonction : true
+      }
     });
     return { data: agents };
   }
