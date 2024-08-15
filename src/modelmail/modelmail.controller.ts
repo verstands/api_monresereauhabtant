@@ -1,8 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, Put,  UseInterceptors, UploadedFile, BadRequestException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ModelmailService } from './modelmail.service';
 import { ModeleMailDto } from 'src/dto/mailmodele.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { Express } from 'express';
 
 @Controller('modelmail')
 export class ModelmailController {
@@ -37,38 +35,8 @@ export class ModelmailController {
       return this.roleservice.delete({ id });
     }
 
-  @Post()
-  @UseInterceptors(FileInterceptor('fichier'))
-  async create(
-    @Body() formData: any,
-    @UploadedFile() file: Express.Multer.File
-  ) {
-    try {
-      if (file) {
-        formData.fichier = file.path; 
-      }
-
-      const dto: ModeleMailDto = {
-        id_user: formData.id_user,
-        active: formData.active === 'true' || formData.active === true, 
-        bccexp: formData.bccexp,
-        ccexp: formData.ccexp,
-        contenue: formData.contenue,
-        description: formData.description,
-        disnataireexp: formData.disnataireexp,
-        emailexp: formData.emailexp,
-        fichier: formData.fichier || null,
-        nom: formData.nom,
-        nomexp: formData.nomexp,
-        id_campagne: formData.id_campagne,
-        id_fonction: formData.id_fonction,
-        sujet: formData.sujet,
-      };
-
-      return await this.roleservice.create(dto);
-    } catch (error) {
-      console.error('Error in create method:', error);
-      throw new BadRequestException('Validation failed. Please check your input.');
+    @Post()
+    async create(@Body() agendadto: ModeleMailDto) {
+      return await this.roleservice.create(agendadto);
     }
-  }
 }

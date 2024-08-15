@@ -15,8 +15,8 @@ export class MailService {
       from: from,
       subject: data.objet,
       html: `
-        <h1>${data.objet}!</h1>
-        <p>${data.message}</p>
+        <h1>${data.objet}</h1>
+        <p>${data.message}</p
       `,
     });
   }

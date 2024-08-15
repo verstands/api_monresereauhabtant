@@ -32,6 +32,7 @@ import { PospectModule } from './pospect/pospect.module';
 import { FonctionModule } from './fonction/fonction.module';
 import { MailModule } from './mail/mail.module';
 import { ModelmailModule } from './modelmail/modelmail.module';
+import { PiecejointModule } from './piecejoint/piecejoint.module';
 
 
 @Module({
@@ -69,6 +70,7 @@ import { ModelmailModule } from './modelmail/modelmail.module';
     FonctionModule,
     MailModule,
     ModelmailModule,
+    PiecejointModule,
   ],
 })
 export class AppModule {}

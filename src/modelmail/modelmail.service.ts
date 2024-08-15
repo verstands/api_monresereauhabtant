@@ -12,8 +12,8 @@ export class ModelmailService {
         id: 'desc',
       },
       include: {
-        //capagnemodel: true,
-        //fonctionmodel: true,
+        capagnemodel: true,
+        fonctionmodel: true,
       },
     });
     return { data: data };
@@ -29,8 +29,8 @@ export class ModelmailService {
         id: 'desc',
       },
       include: {
-       // capagnemodel: true,
-       // fonctionmodel: true,
+        capagnemodel: true,
+        fonctionmodel: true,
       },
     });
     return { data: data };
@@ -42,8 +42,8 @@ export class ModelmailService {
         id: id,
       },
       include: {
-        //capagnemodel: true,
-       // fonctionmodel: true,
+        capagnemodel: true,
+        fonctionmodel: true,
       },
     });
     return { data: data };
@@ -67,13 +67,13 @@ export class ModelmailService {
         id,
       },
     });
-    return { message: 'model mail supprimée avec success ' };
+    return { message: 'model mail supprimÃ©e avec success ' };
   }
 
   async create(dataEn: ModeleMailDto) {
     const createAgent = await this.prismaservice.modelmail.create({
       data: dataEn,
     });
-    return createAgent; 
+    return createAgent;
   }
 }

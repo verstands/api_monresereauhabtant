@@ -30,6 +30,7 @@ model Agents {
   agentrole     Accesroles[]
   agentprospect Prospects[]
   agentpospect  Pospects[]
+  piecejoint  PieceJoits[]
   //agentmodel    Modelmail[]
 }
 
@@ -43,7 +44,7 @@ model Fonctions {
   id            String      @id @default(cuid())
   initule       String
   agents        Agents[]
- 
+  fonctionmodel Modelmail[]
 }
 
 model Menus {
@@ -97,7 +98,7 @@ model Capamgnes {
   restant    String
 
   pospects     Pospects[]
-  //capagnemodel Modelmail[]
+  capagnemodel Modelmail[]
 }
 
 model Appels {
@@ -255,6 +256,8 @@ model Prospects {
   surface          String
   id_typechauffage String
   id_typerevenu    String
+  
+  piecejoint PieceJoits[]
 
   agentprospect Agents         @relation(fields: [id_user], references: [id])
   typechauffage TypeChauffages @relation(fields: [id_typechauffage], references: [id])
@@ -290,13 +293,13 @@ model Pospects {
 }
 
 model Modelmail {
-  id            String @id @default(cuid())
+  id            String  @id @default(cuid())
   id_user       String
   active        Boolean
   bccexp        String
   ccexp         String
-  contenue      String @db.Text()
-  description   String @db.Text()
+  contenue      String  @db.Text()
+  description   String  @db.Text()
   disnataireexp String
   emailexp      String
   fichier       String
@@ -306,7 +309,19 @@ model Modelmail {
   id_fonction   String
   sujet         String
 
-  //capagnemodel  Capamgnes @relation(fields: [id_campagne], references: [id])
+  capagnemodel  Capamgnes @relation(fields: [id_campagne], references: [id])
   //agentmodel    Agents    @relation(fields: [id_user], references: [id])
-  //fonctionmodel Fonctions @relation(fields: [id_fonction], references: [id])
+  fonctionmodel Fonctions @relation(fields: [id_fonction], references: [id])
+}
+
+model PieceJoits {
+  id          String  @id @default(cuid())
+  id_user     String
+  id_prospect String
+  file        String  @db.Text()
+  date        String
+  status      Boolean
+
+  agentmodel  Agents @relation(fields: [id_user], references: [id])
+  prospcetmodel Prospects @relation(fields: [id_prospect], references: [id])
 }
