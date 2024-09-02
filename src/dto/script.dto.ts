@@ -12,4 +12,8 @@ export class ScriptDto {
     message: 'Le champ position est obligatoire',
   })
   position: string;
+  @IsNotEmpty({
+    message: 'Le champ campagne est obligatoire',
+  })
+  campagne: string;
 }

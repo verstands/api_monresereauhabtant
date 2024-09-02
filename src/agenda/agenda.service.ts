@@ -3,12 +3,14 @@ import { AgendaDto } from 'src/dto/agenda.dto';
 import { NotificationGateway } from 'src/notification/notification.gateway';
 import { PrismaService } from 'src/prisma.service';
 import * as cron from 'node-cron';
+import { NotificationService } from 'src/notification/notification.service';
 
 @Injectable()
 export class AgendaService {
   constructor(
     private readonly prismaservice: PrismaService,
     private readonly notificationGateway: NotificationGateway,
+    private readonly notificationservice: NotificationService,
   ) {
     this.scheduleNotifications();
   }
@@ -73,7 +75,7 @@ export class AgendaService {
       });
       const now = new Date();
   
-      agendas.forEach((agenda) => {
+      agendas.forEach(async (agenda) => {
         const startTime = new Date(agenda.start);
         const notificationTime = new Date(startTime.getTime() - 5 * 60000);
   
@@ -83,6 +85,13 @@ export class AgendaService {
             description: `L'événement ${agenda.title} pour ${agenda.pospect.nom} est prévu pour ${startTime.toLocaleTimeString()}. véfirie votre agenda `,
             id: agenda.pospect.id
           });
+
+         await this.notificationservice.create({
+           title: `Rappel d'événement`,
+           description: `L'événement ${agenda.title} pour ${agenda.pospect.nom} est prévu pour ${startTime.toLocaleTimeString()}.`,
+           agentId: agenda.id_user,
+           createdAt: new Date().toISOString() 
+         });
         }
       });
     });

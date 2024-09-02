@@ -17,7 +17,7 @@ export class AuthService {
 
   async login(authBody: AuthBody) {
     const hashePassword = await this.hasPassword(authBody.password);
-    console.log(hashePassword, authBody.password);
+    console.log(hashePassword, authBody.password);  
     const existeEmail = await this.prismaservice.agents.findUnique({
       where: {
         email: authBody.email,
@@ -41,11 +41,11 @@ export class AuthService {
 
     const application = await this.prismaservice.accesapplications.findMany({
       where: {
-        id_user: existeEmail.id,
+        id_user: existeEmail.id_fonction,
       },
       include: {
         application: true,
-        agents: true,
+        Accesapplications: true,
       },
     });
 

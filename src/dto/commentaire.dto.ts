@@ -14,4 +14,8 @@ export class CommentaireDto {
     message: 'Le champ utilisateur est obligatoire',
   })
   id_user: string;
+  @IsNotEmpty({
+    message: 'Le champ data est obligatoire',
+  })
+  date: string;
 }

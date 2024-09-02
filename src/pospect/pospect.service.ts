@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { PaginationDto } from 'src/dto/paginationPage.dto';
 import { PospectDto } from 'src/dto/pospect.dto';
 import { PrismaService } from 'src/prisma.service';
+import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 
 @Injectable()
 export class PospectService {
     constructor(private readonly prismaservice: PrismaService) {}
 
-    async get() {
+    async get( paginationdto : PaginationDto) {
       const data = await this.prismaservice.pospects.findMany({
         orderBy:{
             "id" : "desc"
@@ -15,10 +17,14 @@ export class PospectService {
             agentpospect : true,
             capagnepospect : true,
             produitpospect : true
-        }
+        },
+        skip : paginationdto.skip,
+        take : paginationdto.limit ?? DEFAULT_PAGE_SIZE
       });
       return { data: data };
     }
+    
+    
 
     async getcountNouveau() {
       const data = await this.prismaservice.pospects.count({
@@ -95,6 +101,7 @@ export class PospectService {
           ...data,
         },
       });
+      
       return update;
     }
 

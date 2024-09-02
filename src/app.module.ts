@@ -33,6 +33,12 @@ import { FonctionModule } from './fonction/fonction.module';
 import { MailModule } from './mail/mail.module';
 import { ModelmailModule } from './modelmail/modelmail.module';
 import { PiecejointModule } from './piecejoint/piecejoint.module';
+import { NotificationModule } from './notification/notification.module';
+import { LoggingModule } from './logging/logging.module';
+import { HistoriqueafficheModule } from './historiqueaffiche/historiqueaffiche.module';
+import { FonctionmenuModule } from './fonctionmenu/fonctionmenu.module';
+import { ModulesModule } from './modules/modules.module';
+import { ModuleprivilegeModule } from './moduleprivilege/moduleprivilege.module';
 
 
 @Module({
@@ -71,6 +77,12 @@ import { PiecejointModule } from './piecejoint/piecejoint.module';
     MailModule,
     ModelmailModule,
     PiecejointModule,
+    NotificationModule,
+    LoggingModule,
+    HistoriqueafficheModule,
+    FonctionmenuModule,
+    ModulesModule,
+    ModuleprivilegeModule,
   ],
 })
 export class AppModule {}

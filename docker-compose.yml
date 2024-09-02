@@ -19,6 +19,6 @@ services:
       - 9080:80
     environment:
       - PMA_ARBITRARY=1
-
+      
 volumes:
   dbdata:

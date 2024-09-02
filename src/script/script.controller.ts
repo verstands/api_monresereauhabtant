@@ -20,10 +20,14 @@ export class ScriptController {
       });
     }
 
-    @Get('/produit/:id_produit')
-    getProduitId(@Param('id_produitd') id_produit: string) {
+    @Get('/produit/:id_produit/:campagne')
+    getProduitId(
+      @Param('id_produit') id_produit: string, 
+      @Param('campagne') campagne: string
+    ) {
       return this.roleservice.getIdProduit({
         id_produit,
+        campagne,  // Ajout de la campagne si nécessaire dans la logique de service
       });
     }
    

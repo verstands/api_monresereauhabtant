@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class PieceJointDto {
   @IsNotEmpty({
@@ -11,10 +11,7 @@ export class PieceJointDto {
   })
   id_prospect : string;
 
-  @IsNotEmpty({
-    message: 'Le champ fichier est obligatoire',
-  })
-  file: string; 
+  file?: string; 
 
   @IsNotEmpty({
     message: 'Le champ date est obligatoire',

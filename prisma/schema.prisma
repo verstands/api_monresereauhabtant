@@ -14,23 +14,24 @@ datasource db {
 }
 
 model Agents {
-  id            String              @id @default(cuid())
+  id            String               @id @default(cuid())
   nom           String
   prenom        String
   mdp           String
   id_fonction   String
   statut        String
-  email         String              @unique
-  fonction      Fonctions           @relation(fields: [id_fonction], references: [id])
+  email         String               @unique
+  fonction      Fonctions            @relation(fields: [id_fonction], references: [id])
   agendas       Agendas[]
   appels        Appels[]
   dossiers      Dossiers[]
   commentaires  Commentaires[]
-  agents        Accesapplications[]
   agentrole     Accesroles[]
   agentprospect Prospects[]
   agentpospect  Pospects[]
-  piecejoint  PieceJoits[]
+  notification  Notifications[]
+  historique    HistoriqueAffiches[]
+  //piecejoint  PieceJoits[]
   //agentmodel    Modelmail[]
 }
 
@@ -38,25 +39,51 @@ model Roles {
   id      String       @id @default(cuid())
   initule String
   role    Accesroles[]
+  id_privilege ModulesPrivilege[]
 }
 
 model Fonctions {
-  id            String      @id @default(cuid())
-  initule       String
-  agents        Agents[]
-  fonctionmodel Modelmail[]
+  id      String   @id @default(cuid())
+  initule String
+  agents  Agents[]
+
+  fonctionmodel     Modelmail[]
+  Accesapplications Accesapplications[]
+  fonctions FonctionMenu[]
 }
 
 model Menus {
   id        String      @id @default(cuid())
   nom       String
-  sousmenus Sousmenus[]
+  icon     String
+  url     String
+
+  module Modules[]
+  menus FonctionMenu[]
+}
+model FonctionMenu {
+  id      String @id @default(cuid())
+  idmenu     String
+  idfonction String
+  fonction Fonctions  @relation(fields: [idfonction], references: [id])
+  menus Menus  @relation(fields: [idmenu], references: [id])
 }
 
-model Sousmenus {
+model Modules {
   id      String @id @default(cuid())
   nom     String
-  id_menu Menus  @relation(fields: [id], references: [id])
+  id_menu String
+  id_menus Menus  @relation(fields: [id_menu], references: [id])
+  id_moddule ModulesPrivilege[]
+}
+
+model ModulesPrivilege {
+  id      String @id @default(cuid())
+  id_module     String
+  id_privilege  String
+
+  moddules Modules  @relation(fields: [id_module], references: [id])
+  privileges Roles  @relation(fields: [id_privilege], references: [id])
 }
 
 model Agendas {
@@ -97,6 +124,7 @@ model Capamgnes {
   distribue  String
   restant    String
 
+  script     Scripts[]
   pospects     Pospects[]
   capagnemodel Modelmail[]
 }
@@ -121,8 +149,10 @@ model Scripts {
   titre    String
   contenue String @db.Text()
   position String
+  campagne String
 
   id_produit TypeProduits @relation(fields: [position], references: [id])
+  id_campagne Capamgnes @relation(fields: [campagne], references: [id])
 }
 
 model Provenances {
@@ -178,6 +208,7 @@ model Commentaires {
   message     String   @db.Text()
   id_user     String
   id_prospect String
+  date        String
   user        Agents   @relation(fields: [id_user], references: [id])
   pospect     Pospects @relation(fields: [id_prospect], references: [id])
 }
@@ -198,8 +229,9 @@ model Conclusions {
 }
 
 model Status {
-  id  String @id @default(cuid())
-  nom String
+  id    String @id @default(cuid())
+  nom   String
+  value String
 }
 
 model Directions {
@@ -230,8 +262,8 @@ model Accesapplications {
   id_user        String
   id_application String
 
-  agents      Agents       @relation(fields: [id_user], references: [id])
-  application Applications @relation(fields: [id_application], references: [id])
+  Accesapplications Fonctions    @relation(fields: [id_user], references: [id])
+  application       Applications @relation(fields: [id_application], references: [id])
 }
 
 model Accesroles {
@@ -256,8 +288,8 @@ model Prospects {
   surface          String
   id_typechauffage String
   id_typerevenu    String
-  
-  piecejoint PieceJoits[]
+
+  //piecejoint PieceJoits[]
 
   agentprospect Agents         @relation(fields: [id_user], references: [id])
   typechauffage TypeChauffages @relation(fields: [id_typechauffage], references: [id])
@@ -286,6 +318,7 @@ model Pospects {
 
   pospect     Agendas[]
   commenatire Commentaires[]
+  historique  HistoriqueAffiches[]
 
   capagnepospect Capamgnes    @relation(fields: [id_campagne], references: [id])
   produitpospect TypeProduits @relation(fields: [id_produit], references: [id])
@@ -315,13 +348,51 @@ model Modelmail {
 }
 
 model PieceJoits {
-  id          String  @id @default(cuid())
+  id          String @id @default(cuid())
   id_user     String
   id_prospect String
-  file        String  @db.Text()
+  file        String @db.Text()
   date        String
-  status      Boolean
+  status      String
 
-  agentmodel  Agents @relation(fields: [id_user], references: [id])
-  prospcetmodel Prospects @relation(fields: [id_prospect], references: [id])
+  //agents  Agents @relation(fields: [id_user], references: [id])
+  //prospcets Prospects @relation(fields: [id_prospect], references: [id])
+}
+
+model Notifications {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  createdAt   String
+  agentId     String
+
+  agent Agents @relation(fields: [agentId], references: [id])
+}
+
+model Logdata {
+  id             Int      @id @default(autoincrement())
+  action         String
+  endpoint       String
+  user           String
+  processingTime Int
+  ip             String?
+  userAgent      String?
+  os             String?
+  browser        String?
+  isp            String?
+  pays           String?
+  latitude       Float?
+  longitude      Float?
+  createdAt      DateTime @default(now())
+}
+
+model HistoriqueAffiches {
+  id           String   @id @default(cuid())
+  action       String
+  userProspect String
+  userAgent    String
+  createdAt    DateTime @default(now())
+
+  agent    Agents   @relation(fields: [userAgent], references: [id])
+  prospect Pospects @relation(fields: [userProspect], references: [id])
 }

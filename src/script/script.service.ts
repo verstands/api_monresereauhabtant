@@ -13,6 +13,7 @@ export class ScriptService {
       },
       include: {
         id_produit: true,
+        id_campagne: true,
       },
     });
     return { data: data };
@@ -27,19 +28,21 @@ export class ScriptService {
     return { data: data };
   }
 
-  async getIdProduit({ id_produit }: { id_produit: string }) {
+  async getIdProduit({ id_produit, campagne }: { id_produit: string, campagne: string }) {
     const data = await this.prismaservice.scripts.findMany({
       where: {
         position: id_produit,
+        campagne: campagne,
       },
       include: {
         id_produit: true,
+        id_campagne : true
       },
     });
     return { data: data };
   }
 
-  async update({ id, ...data }: { id: string } & ScriptDto) {
+  async update({ id, ...data }: { id: string } & ScriptDto) { 
     const update = await this.prismaservice.scripts.update({
       where: {
         id,

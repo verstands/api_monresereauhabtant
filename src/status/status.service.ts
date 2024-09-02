@@ -41,11 +41,9 @@ export class StatusService {
     return { message: 'nom supprimé avec success ' };
   }
 
-  async create(applicationdto: StatusDto) {
+  async create(dataS: StatusDto) {
     const createAgent = await this.prismaservice.status.create({
-      data: {
-        nom: applicationdto.nom,
-      },
+      data: dataS
     });
     return createAgent;
   }

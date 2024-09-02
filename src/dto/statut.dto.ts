@@ -4,4 +4,8 @@ export class StatusDto {
     message: 'Le champ nom est obligatoire',
   })
   nom: string;
+  @IsNotEmpty({
+    message: 'Le champ nom est obligatoire',
+  })
+  value: string;
 }
