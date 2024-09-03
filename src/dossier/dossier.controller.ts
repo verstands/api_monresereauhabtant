@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { DossierService } from './dossier.service';
 import { PospectDto } from 'src/dto/pospect.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('dossier')
 export class DossierController {
     constructor(private readonly roleservice : DossierService) {}

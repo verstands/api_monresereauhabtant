@@ -22,6 +22,10 @@ export class AuthService {
       where: {
         email: authBody.email,
       },
+      include : {
+        fonction : true,
+        
+      }
     });
 
     if (!existeEmail) {
@@ -47,17 +51,25 @@ export class AuthService {
         application: true,
         Accesapplications: true,
       },
-    });
+    });  
 
-    const role = await this.prismaservice.accesroles.findMany({
-      where: {
-        id_user: existeEmail.id,
+    /*const menu = await this.prismaservice.fonctionMenu.findMany({
+      where : {
+        idfonction : existeEmail.id_fonction
       },
-      include: {
-        role: true,
-        agentrole: true,
-      },
-    });
+      include : {
+        fonction : true
+      }
+    })
+
+    const module = await this.prismaservice.modules.findMany({
+        where : {
+          id_menu : menu[0].idmenu,
+        },
+        include : {
+          
+        }
+    }) */
 
     const payload: UserPayload = { userid: existeEmail.id };
     const accessToken = await this.jwtService.sign(payload);
@@ -65,7 +77,6 @@ export class AuthService {
     return {
       access_token: accessToken,
       application: application,
-      role: role,
       agent: existeEmail,
     };
   }

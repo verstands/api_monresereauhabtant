@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { TyperevenuService } from './typerevenu.service';
 import { TypeRevenuDto } from 'src/dto/typerevenu.dto';
+
 @UseGuards(JwtAuthGuard)
 @Controller('typerevenu')
 export class TyperevenuController {

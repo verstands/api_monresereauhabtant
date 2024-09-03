@@ -10,7 +10,7 @@ export class ModulesService {
       const data = await this.prismaservice.modules.findMany({
         orderBy: {
           id : 'desc'
-        }
+        },
       });
       return { data: data };
     }

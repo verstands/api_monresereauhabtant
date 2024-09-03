@@ -27,7 +27,6 @@ import { StatusModule } from './status/status.module';
 import { InstallateurModule } from './installateur/installateur.module';
 import { InvaliditeModule } from './invalidite/invalidite.module';
 import { ArchivageModule } from './archivage/archivage.module';
-import { AcceroleModule } from './accerole/accerole.module';
 import { PospectModule } from './pospect/pospect.module';
 import { FonctionModule } from './fonction/fonction.module';
 import { MailModule } from './mail/mail.module';
@@ -71,7 +70,6 @@ import { ModuleprivilegeModule } from './moduleprivilege/moduleprivilege.module'
     InstallateurModule,
     InvaliditeModule,
     ArchivageModule,
-    AcceroleModule,
     PospectModule,
     FonctionModule,
     MailModule,

@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { FonctionmenuService } from './fonctionmenu.service';
 import { FonctionMenuDto } from 'src/dto/FonctionMenu.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('fonctionmenu')
 export class FonctionmenuController {
     constructor(private readonly roleservice : FonctionmenuService) {}

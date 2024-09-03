@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { HistoriqueafficheService } from './historiqueaffiche.service';
 import { HistoriqueAffiche } from 'src/dto/HistoriqueAffiche';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('historiqueaffiche')
 export class HistoriqueafficheController {
     constructor(private readonly roleservice : HistoriqueafficheService) {}

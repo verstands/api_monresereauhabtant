@@ -10,6 +10,10 @@ export class ModuleprivilegeService {
       const data = await this.prismaservice.modulesPrivilege.findMany({
         orderBy: {
           id : 'desc'
+        },
+        include : {
+            moddules : true,
+            privileges : true
         }
       });
       return { data: data };

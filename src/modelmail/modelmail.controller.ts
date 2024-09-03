@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ModelmailService } from './modelmail.service';
 import { ModeleMailDto } from 'src/dto/mailmodele.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('modelmail')
 export class ModelmailController {
     constructor(private readonly roleservice : ModelmailService) {}

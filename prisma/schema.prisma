@@ -26,7 +26,6 @@ model Agents {
   appels        Appels[]
   dossiers      Dossiers[]
   commentaires  Commentaires[]
-  agentrole     Accesroles[]
   agentprospect Prospects[]
   agentpospect  Pospects[]
   notification  Notifications[]
@@ -36,9 +35,8 @@ model Agents {
 }
 
 model Roles {
-  id      String       @id @default(cuid())
-  initule String
-  role    Accesroles[]
+  id           String             @id @default(cuid())
+  initule      String
   id_privilege ModulesPrivilege[]
 }
 
@@ -49,41 +47,47 @@ model Fonctions {
 
   fonctionmodel     Modelmail[]
   Accesapplications Accesapplications[]
-  fonctions FonctionMenu[]
+  fonctions         FonctionMenu[]
+  Menus             Menus?              @relation(fields: [menusId], references: [id])
+  menusId           String?
 }
 
 model Menus {
-  id        String      @id @default(cuid())
-  nom       String
-  icon     String
-  url     String
+  id   String @id @default(cuid())
+  nom  String
+  icon String
+  url  String
 
-  module Modules[]
-  menus FonctionMenu[]
+  fonction     Fonctions[]
+  module       Modules[]
+  FonctionMenu FonctionMenu[]
 }
+
 model FonctionMenu {
-  id      String @id @default(cuid())
+  id         String @id @default(cuid())
   idmenu     String
   idfonction String
-  fonction Fonctions  @relation(fields: [idfonction], references: [id])
-  menus Menus  @relation(fields: [idmenu], references: [id])
+
+  fonction Fonctions @relation(fields: [idfonction], references: [id])
+  menu     Menus     @relation(fields: [idmenu], references: [id])
 }
 
 model Modules {
   id      String @id @default(cuid())
   nom     String
   id_menu String
-  id_menus Menus  @relation(fields: [id_menu], references: [id])
-  id_moddule ModulesPrivilege[]
+
+  menus            Menus              @relation(fields: [id_menu], references: [id])
+  ModulesPrivilege ModulesPrivilege[]
 }
 
 model ModulesPrivilege {
-  id      String @id @default(cuid())
-  id_module     String
-  id_privilege  String
+  id           String @id @default(cuid())
+  id_module    String
+  id_privilege String
 
-  moddules Modules  @relation(fields: [id_module], references: [id])
-  privileges Roles  @relation(fields: [id_privilege], references: [id])
+  moddules   Modules @relation(fields: [id_module], references: [id])
+  privileges Roles   @relation(fields: [id_privilege], references: [id])
 }
 
 model Agendas {
@@ -124,7 +128,7 @@ model Capamgnes {
   distribue  String
   restant    String
 
-  script     Scripts[]
+  script       Scripts[]
   pospects     Pospects[]
   capagnemodel Modelmail[]
 }
@@ -151,8 +155,8 @@ model Scripts {
   position String
   campagne String
 
-  id_produit TypeProduits @relation(fields: [position], references: [id])
-  id_campagne Capamgnes @relation(fields: [campagne], references: [id])
+  id_produit  TypeProduits @relation(fields: [position], references: [id])
+  id_campagne Capamgnes    @relation(fields: [campagne], references: [id])
 }
 
 model Provenances {
@@ -264,15 +268,6 @@ model Accesapplications {
 
   Accesapplications Fonctions    @relation(fields: [id_user], references: [id])
   application       Applications @relation(fields: [id_application], references: [id])
-}
-
-model Accesroles {
-  id      String @id @default(cuid())
-  id_user String
-  id_role String
-
-  agentrole Agents @relation(fields: [id_user], references: [id])
-  role      Roles  @relation(fields: [id_role], references: [id])
 }
 
 model Prospects {
