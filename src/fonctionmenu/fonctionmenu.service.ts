@@ -13,6 +13,7 @@ export class FonctionmenuService {
         },
         include : {
            fonction : true,
+           menu : true
         }
       });
       return { data: data };

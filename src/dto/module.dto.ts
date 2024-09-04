@@ -7,5 +7,5 @@ export class ModuleDto {
   @IsNotEmpty({
     message: 'Le champ a nom obligatoire',
   })
-  id_menu: string;
+  id_fonction: string;
 }

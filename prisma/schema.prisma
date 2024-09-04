@@ -48,8 +48,8 @@ model Fonctions {
   fonctionmodel     Modelmail[]
   Accesapplications Accesapplications[]
   fonctions         FonctionMenu[]
-  Menus             Menus?              @relation(fields: [menusId], references: [id])
-  menusId           String?
+  menus             Menus[]
+  Modules           Modules[]
 }
 
 model Menus {
@@ -59,7 +59,6 @@ model Menus {
   url  String
 
   fonction     Fonctions[]
-  module       Modules[]
   FonctionMenu FonctionMenu[]
 }
 
@@ -73,11 +72,11 @@ model FonctionMenu {
 }
 
 model Modules {
-  id      String @id @default(cuid())
-  nom     String
-  id_menu String
+  id          String @id @default(cuid())
+  nom         String
+  id_fonction String
 
-  menus            Menus              @relation(fields: [id_menu], references: [id])
+  fonction         Fonctions?         @relation(fields: [id_fonction], references: [id])
   ModulesPrivilege ModulesPrivilege[]
 }
 
@@ -232,12 +231,6 @@ model Conclusions {
   conteneu String
 }
 
-model Status {
-  id    String @id @default(cuid())
-  nom   String
-  value String
-}
-
 model Directions {
   id  String @id @default(cuid())
   nom String
@@ -390,4 +383,35 @@ model HistoriqueAffiches {
 
   agent    Agents   @relation(fields: [userAgent], references: [id])
   prospect Pospects @relation(fields: [userProspect], references: [id])
+}
+
+model EtapeWorkflows {
+  id                 String               @id @default(cuid())
+  ordre              String
+  couleur            String
+  libelle            String
+  statut             String
+  CategorieWorkflows CategorieWorkflows[]
+}
+
+model CategorieWorkflows {
+  id      String @id @default(cuid())
+  ordre   String
+  libelle String
+  statut  String
+  idetape String
+
+  workflow EtapeWorkflows? @relation(fields: [idetape], references: [id])
+  Status   Status[]
+}
+
+model Status {
+  id          String @id @default(cuid())
+  ordre       String
+  couleur     String
+  libelle     String
+  status      String
+  idcategorie String
+
+  catworkflow CategorieWorkflows? @relation(fields: [idcategorie], references: [id])
 }

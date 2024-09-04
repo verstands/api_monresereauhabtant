@@ -17,15 +17,31 @@ export class AuthService {
 
   async login(authBody: AuthBody) {
     const hashePassword = await this.hasPassword(authBody.password);
-    console.log(hashePassword, authBody.password);  
+    console.log(hashePassword, authBody.password);
     const existeEmail = await this.prismaservice.agents.findUnique({
       where: {
         email: authBody.email,
       },
-      include : {
-        fonction : true,
-        
-      }
+      include: {
+        fonction: {
+          include: {
+            Modules: {
+              include: {
+                ModulesPrivilege: {
+                  include: {
+                    privileges: true,
+                  },
+                },
+              },
+            },
+            fonctions: {
+              include : {
+                menu : true
+              }
+            }
+          },
+        },
+      },
     });
 
     if (!existeEmail) {
@@ -51,25 +67,7 @@ export class AuthService {
         application: true,
         Accesapplications: true,
       },
-    });  
-
-    /*const menu = await this.prismaservice.fonctionMenu.findMany({
-      where : {
-        idfonction : existeEmail.id_fonction
-      },
-      include : {
-        fonction : true
-      }
-    })
-
-    const module = await this.prismaservice.modules.findMany({
-        where : {
-          id_menu : menu[0].idmenu,
-        },
-        include : {
-          
-        }
-    }) */
+    });
 
     const payload: UserPayload = { userid: existeEmail.id };
     const accessToken = await this.jwtService.sign(payload);
@@ -144,13 +142,19 @@ export class AuthService {
     return createAgent;
   }
 
-  async resetAgent({email, newPassword }: { email: string; newPassword: string; }): Promise<AgentInterface> {
+  async resetAgent({
+    email,
+    newPassword,
+  }: {
+    email: string;
+    newPassword: string;
+  }): Promise<AgentInterface> {
     const existingAgent = await this.prismaservice.agents.findFirst({
       where: {
         email,
       },
     });
-  
+
     if (!existingAgent) {
       throw new HttpException(
         'Aucun compte trouvé avec cet ID et cet email',
@@ -166,8 +170,7 @@ export class AuthService {
         mdp: hashePassword,
       },
     });
-  
+
     return updatedAgent;
   }
-  
 }
