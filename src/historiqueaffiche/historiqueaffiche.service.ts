@@ -19,6 +19,15 @@ export class HistoriqueafficheService {
     return { data: data };
   }
 
+  async getAdmin() {
+    const data = await this.prismaservice.historiqueAffiches.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+    });
+    return { data: data };
+  }
+
   async getId({ id }: { id: string }) {
     const data = await this.prismaservice.historiqueAffiches.findUnique({
       where: {

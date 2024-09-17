@@ -41,7 +41,7 @@ export class LoggingInterceptor implements NestInterceptor {
           userAgent,
           latitude,
           longitude,
-          os: request.headers['x-os'], 
+          os: request.headers['x-os'],
           browser: request.headers['x-browser'],
           isp: request.headers['x-isp'],
           pays: request.headers['x-pays'],

@@ -22,6 +22,11 @@ export class HistoriqueafficheController {
         id,
       });
     }
+
+    @Get()
+    getAdmin() {
+      return this.roleservice.getAdmin();
+    }
    
   
     @Delete(':id')

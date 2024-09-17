@@ -32,6 +32,7 @@ model Agents {
   historique    HistoriqueAffiches[]
   //piecejoint  PieceJoits[]
   //agentmodel    Modelmail[]
+  Logdata       Logdata[]
 }
 
 model Roles {
@@ -50,6 +51,7 @@ model Fonctions {
   fonctions         FonctionMenu[]
   menus             Menus[]
   Modules           Modules[]
+  CatgorieRole      CatgorieRole[]
 }
 
 model Menus {
@@ -73,10 +75,11 @@ model FonctionMenu {
 
 model Modules {
   id          String @id @default(cuid())
-  nom         String
+  id_module   String
   id_fonction String
 
   fonction         Fonctions?         @relation(fields: [id_fonction], references: [id])
+  moduleperso      ModulePerso?       @relation(fields: [id_module], references: [id])
   ModulesPrivilege ModulesPrivilege[]
 }
 
@@ -106,7 +109,9 @@ model TypeProduits {
   image       String
   titre       String
   description String
+  id_work     String
 
+  work       Workflows   @relation(fields: [id_work], references: [id])
   id_produit Capamgnes[]
   pospects   Pospects[]
   produit    Scripts[]
@@ -372,6 +377,8 @@ model Logdata {
   latitude       Float?
   longitude      Float?
   createdAt      DateTime @default(now())
+
+  agent Agents @relation(fields: [user], references: [id])
 }
 
 model HistoriqueAffiches {
@@ -386,12 +393,16 @@ model HistoriqueAffiches {
 }
 
 model EtapeWorkflows {
-  id                 String               @id @default(cuid())
-  ordre              String
-  couleur            String
-  libelle            String
-  statut             String
+  id          String @id @default(cuid())
+  ordre       String
+  couleur     String
+  libelle     String
+  statut      String
+  description String
+  id_work     String
+
   CategorieWorkflows CategorieWorkflows[]
+  workflow           Workflows?           @relation(fields: [id_work], references: [id])
 }
 
 model CategorieWorkflows {
@@ -401,8 +412,9 @@ model CategorieWorkflows {
   statut  String
   idetape String
 
-  workflow EtapeWorkflows? @relation(fields: [idetape], references: [id])
-  Status   Status[]
+  workflow     EtapeWorkflows? @relation(fields: [idetape], references: [id])
+  Status       Status[]
+  CatgorieRole CatgorieRole[]
 }
 
 model Status {
@@ -414,4 +426,30 @@ model Status {
   idcategorie String
 
   catworkflow CategorieWorkflows? @relation(fields: [idcategorie], references: [id])
+}
+
+model Workflows {
+  id      String @id @default(cuid())
+  ordre   String
+  libelle String
+  statut  String
+
+  etape       EtapeWorkflows[]
+  typeproduit TypeProduits[]
+}
+
+model ModulePerso {
+  id      String    @id @default(cuid())
+  libelle String
+  statut  String
+  Modules Modules[]
+}
+
+model CatgorieRole {
+  id           String @id @default(cuid())
+  id_role      String
+  id_categorie String
+
+  categorie CategorieWorkflows? @relation(fields: [id_categorie], references: [id])
+  role      Fonctions?          @relation(fields: [id_role], references: [id])
 }

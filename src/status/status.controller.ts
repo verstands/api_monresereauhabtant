@@ -20,6 +20,12 @@ export class StatusController {
       id,
     });
   }
+  @Get('categorie/:id')
+    getEtape(@Param('id') id: string) {
+      return this.statusservice.getCategorie({
+        id,
+      });
+    }
 
   @Put(':id')
   updateagenda(@Param('id') id: string, @Body() agentUpdate: StatusDto) {

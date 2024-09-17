@@ -47,11 +47,7 @@ export class TypeproduitService {
   
     async create(applicationdto: TypeProduitDto) {
       const create = await this.prismaservice.typeProduits.create({
-        data: {
-          titre: applicationdto.titre,
-          image: applicationdto.image,
-          description: applicationdto.description,
-        },
+        data: applicationdto
       });
       return create;
     }

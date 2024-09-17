@@ -38,6 +38,11 @@ import { HistoriqueafficheModule } from './historiqueaffiche/historiqueaffiche.m
 import { FonctionmenuModule } from './fonctionmenu/fonctionmenu.module';
 import { ModulesModule } from './modules/modules.module';
 import { ModuleprivilegeModule } from './moduleprivilege/moduleprivilege.module';
+import { EtapeworkflowModule } from './etapeworkflow/etapeworkflow.module';
+import { CategorieworkflowModule } from './categorieworkflow/categorieworkflow.module';
+import { WorkflowModule } from './workflow/workflow.module';
+import { ModulepersoModule } from './moduleperso/moduleperso.module';
+import { CategorieroleModule } from './categorierole/categorierole.module';
 
 
 @Module({
@@ -81,6 +86,11 @@ import { ModuleprivilegeModule } from './moduleprivilege/moduleprivilege.module'
     FonctionmenuModule,
     ModulesModule,
     ModuleprivilegeModule,
+    EtapeworkflowModule,
+    CategorieworkflowModule,
+    WorkflowModule,
+    ModulepersoModule,
+    CategorieroleModule,
   ],
 })
 export class AppModule {}

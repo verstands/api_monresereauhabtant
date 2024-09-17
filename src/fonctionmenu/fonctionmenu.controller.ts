@@ -19,6 +19,13 @@ export class FonctionmenuController {
         id,
       });
     }
+
+    @Get('fonctionmenu/:id')
+    getEtape(@Param('id') id: string) {
+      return this.roleservice.getFontionMenu({
+        id,
+      });
+    }
    
   
     @Delete(':id')

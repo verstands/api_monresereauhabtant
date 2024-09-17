@@ -48,11 +48,30 @@ export class AgentService {
   }
 
   async deleteAgent({ id }: { id: string }) {
+    //await this.prismaservice.fonctions.deleteMany({
+      // where : {
+       // agents : id
+       //}
+    //})
     await this.prismaservice.agents.delete({
       where: {
         id,
       },
     });
     return { message: 'Agent supprimé avec success ' };
+  }
+
+  async getAgentsByFonctions(fonctionIds: number[] | string[]) {
+    const agents = await this.prismaservice.agents.findMany({
+      where: {
+        id_fonction: {
+          in: fonctionIds.map(String),
+        },  
+      },
+      include: {
+        fonction: true, 
+      },
+    });
+    return { data: agents };
   }
 }

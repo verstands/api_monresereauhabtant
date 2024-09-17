@@ -23,8 +23,23 @@ export class PospectService {
       });
       return { data: data };
     }
-    
-    
+
+    async getAgent({ id }: { id: string }) {
+      const data = await this.prismaservice.pospects.findMany({
+        where: {
+          id_user : id,
+        },
+        orderBy:{
+            "id" : "desc"
+        },
+        include:{
+            agentpospect : true,
+            capagnepospect : true,
+            produitpospect : true
+        }
+      });
+      return { data: data };
+    }    
 
     async getcountNouveau() {
       const data = await this.prismaservice.pospects.count({

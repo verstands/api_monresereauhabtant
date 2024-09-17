@@ -27,11 +27,7 @@ export class AuthService {
           include: {
             Modules: {
               include: {
-                ModulesPrivilege: {
-                  include: {
-                    privileges: true,
-                  },
-                },
+                moduleperso : true
               },
             },
             fonctions: {

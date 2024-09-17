@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Post,
   Put,
   UseGuards,
 } from '@nestjs/common';
@@ -36,5 +37,11 @@ export class AgentController {
   @Delete(':id')
   deleteAgent(@Param('id') id: string) {
     return this.agentService.deleteAgent({ id });
+  }
+
+  @Post('by-fonctions')
+  getAgentsByFonctions(@Body() body: { fonctionIds: string[] }) {
+    const { fonctionIds } = body;
+    return this.agentService.getAgentsByFonctions(fonctionIds);
   }
 }

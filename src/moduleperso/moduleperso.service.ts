@@ -1,47 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { ModuleDto } from 'src/dto/module.dto';
+import { ModulePersoDto } from 'src/dto/moduleperso.dto';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
-export class ModulesService {
+export class ModulepersoService {
     constructor(private readonly prismaservice: PrismaService) {}
 
     async get() {
-      const data = await this.prismaservice.modules.findMany({
+      const data = await this.prismaservice.modulePerso.findMany({
         orderBy: {
           id : 'desc'
-        },
-        include : {
-          fonction : true
         }
       });
       return { data: data };
     }
   
     async getId({ id }: { id: string }) {
-      const data = await this.prismaservice.modules.findUnique({
+      const data = await this.prismaservice.modulePerso.findUnique({
         where: {
           id: id,
         },
       });
       return { data: data };
     }
-
-    async getModuleFonction({ id }: { id: string }) {
-      const data = await this.prismaservice.modules.findMany({
-        where: {
-          id_fonction: id,
-        },
-        include : {
-          fonction : true,
-          moduleperso : true
-        }
-      });
-      return { data: data };
-    }
   
-    async update({ id, ...data }: { id: string } & ModuleDto) {
-      const update = await this.prismaservice.modules.update({
+    async update({ id, ...data }: { id: string } & ModulePersoDto) {
+      const update = await this.prismaservice.modulePerso.update({
         where: {
           id,
         },
@@ -61,8 +45,8 @@ export class ModulesService {
       return { message: 'nom supprimé avec success ' };
     }
   
-    async create(applicationdto: ModuleDto) {
-      const create = await this.prismaservice.modules.create({
+    async create(applicationdto: ModulePersoDto) {
+      const create = await this.prismaservice.modulePerso.create({
         data: applicationdto
       });
       return create;

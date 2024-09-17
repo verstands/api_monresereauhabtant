@@ -20,6 +20,15 @@ export class StatusService {
     return { data: agenda };
   }
 
+  async getCategorie({ id }: { id: string }) {
+    const data = await this.prismaservice.status.findMany({
+      where: {
+        idcategorie: id,
+      },
+    });
+    return { data: data };
+  }
+
   async updateSatus({ id, ...data }: { id: string } & StatusDto) {
     const update = await this.prismaservice.status.update({
       where: {

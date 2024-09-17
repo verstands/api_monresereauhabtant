@@ -19,6 +19,14 @@ export class ModulesController {
         id,
       });
     }
+    
+    @Get('modulefonciton/:id')
+    getEtape(@Param('id') id: string) {
+      return this.alldata.getModuleFonction({
+        id,
+      });
+    }
+   
   
     @Put(':id')
     update(@Param('id') id: string, @Body() agentUpdate: ModuleDto) {

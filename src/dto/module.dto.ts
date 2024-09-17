@@ -3,7 +3,7 @@ export class ModuleDto {
   @IsNotEmpty({
     message: 'Le champ a nom obligatoire',
   })
-  nom: string;
+  id_module: string;
   @IsNotEmpty({
     message: 'Le champ a nom obligatoire',
   })

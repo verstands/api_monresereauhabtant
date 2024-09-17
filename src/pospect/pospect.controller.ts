@@ -24,6 +24,11 @@ export class PospectController {
     return this.roleservice.get(paginationdto);
   }
 
+  @Get('agent/:id')
+  getAGENT(@Param('id') id: string) {
+    return this.roleservice.getAgent({ id });
+  }
+
   @Get('one/one')
   getIdOne() {
     return this.roleservice.getIdOneProspect();
