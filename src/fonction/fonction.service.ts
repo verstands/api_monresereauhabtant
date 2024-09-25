@@ -51,4 +51,41 @@ export class FonctionService {
         });
         return createAgent;
     }
+<<<<<<< HEAD
+=======
+
+    async getStatutsByFonctionId(fonctionId: string) {
+      const data = await this.prismaservice.fonctions.findUnique({
+        where: { id: fonctionId },
+        select: {
+          CatgorieRole: {
+            select: {
+              // Relation avec EtapeWorkflows
+              categorie : {
+                select: {
+                  // Relation avec CategorieWorkflows
+                  CategorieWorkflows: {
+                    select: {
+                      // Relation avec Status
+                      Status: {
+                        select: {
+                          id: true,
+                          ordre: true,
+                          couleur: true,
+                          libelle: true,
+                          status: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    
+      return { data };
+    }
+>>>>>>> b618e5f (ddelo)
 }

@@ -41,9 +41,15 @@ export class PospectController {
     });
   }
 
+<<<<<<< HEAD
   @Get('countNouveau/countNouveau')
   getcountNouveau() {
     return this.roleservice.getcountNouveau();
+=======
+  @Get('countNouveau/countNouveau/:id')
+  getcountNouveau(@Param('id') id: string) {
+    return this.roleservice.getcountNouveau({id});
+>>>>>>> b618e5f (ddelo)
   }
 
   @Get(':id')
@@ -53,10 +59,18 @@ export class PospectController {
     });
   }
 
+<<<<<<< HEAD
   @Put('nrp/:id')
   updatenrp(@Param('id') id: string) {
     return this.roleservice.updateNRP({ id });
   }
+=======
+  @Put('nrp/:id/:idstatut')
+  updatenrp(@Param('id') id: string, @Param('idstatut') idstatut: string) {
+    return this.roleservice.updateNRP({ id, idstatut });
+  }
+  
+>>>>>>> b618e5f (ddelo)
 
   @Put('rdv/:id')
   updaterdv(@Param('id') id: string) {

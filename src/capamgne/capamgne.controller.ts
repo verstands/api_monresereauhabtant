@@ -19,7 +19,12 @@ export class CapamgneController {
     getCampagne(@Param('id') id: string){
         return this.campagneservice.getcampagne({
             id,
+<<<<<<< HEAD
         })
+=======
+        },
+      )
+>>>>>>> b618e5f (ddelo)
     }
 
     @Put(':id')

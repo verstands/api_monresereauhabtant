@@ -49,6 +49,12 @@ export class PospectDto {
   @IsOptional()
   typelead: string
 
+<<<<<<< HEAD
+=======
+  @IsOptional()
+  statuslead: string
+
+>>>>>>> b618e5f (ddelo)
   @IsEmail(
     {},
     {

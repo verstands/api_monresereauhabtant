@@ -127,7 +127,11 @@ export class AuthService {
         <p>Bonjour ${agentinfrface.prenom},</p>
         <p>Nous sommes ravis de vous accueillir au sein de Mon Réseau Habitat, votre partenaire de confiance pour la gestion de la relation client.</p>
         <p>Votre compte a été créé avec succès. Vous pouvez maintenant accéder à notre plateforme en utilisant l'adresse email que vous avez fournie lors de l'inscription. Pour des raisons de sécurité, nous vous recommandons de modifier votre mot de passe dès que possible en cliquant sur le lien ci-dessous :</p>
+<<<<<<< HEAD
         <p><a href="http://localhost:5173/resetpassword/${agentinfrface.email}"><i></i>localhost:5173/resetpassword/${agentinfrface.email}</a></p>
+=======
+        <p><a href="http://185.182.186.58:5173/resetpassword/${agentinfrface.email}"><i></i>185.182.186.58:5173/resetpassword/${agentinfrface.email}</a></p>
+>>>>>>> b618e5f (ddelo)
         <p>Ce lien vous permettra de définir un nouveau mot de passe pour sécuriser votre compte.</p>
         <p>Si vous avez des questions ou besoin d'assistance, notre équipe est à votre disposition pour vous aider.</p>
         <p>Merci de votre confiance, et bienvenue à bord !</p>

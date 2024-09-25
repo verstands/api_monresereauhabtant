@@ -16,7 +16,12 @@ export class PospectService {
         include:{
             agentpospect : true,
             capagnepospect : true,
+<<<<<<< HEAD
             produitpospect : true
+=======
+            produitpospect : true,
+            statutp : true,
+>>>>>>> b618e5f (ddelo)
         },
         skip : paginationdto.skip,
         take : paginationdto.limit ?? DEFAULT_PAGE_SIZE
@@ -41,10 +46,29 @@ export class PospectService {
       return { data: data };
     }    
 
+<<<<<<< HEAD
     async getcountNouveau() {
       const data = await this.prismaservice.pospects.count({
         where: {
           status : "0"
+=======
+    async getcountNouveau({ id }: { id: string }) {
+      const data = await this.prismaservice.pospects.count({
+        where: {
+          statuslead : "0"
+        },
+      });
+
+      const leadagent = await this.prismaservice.pospects.count({
+        where: {
+          id_user : id
+        },
+      });
+
+      const leadagentNRP = await this.prismaservice.pospects.count({
+        where: {
+          id_user : id,
+>>>>>>> b618e5f (ddelo)
         },
       });
 
@@ -53,13 +77,21 @@ export class PospectService {
           status : "2"
         },
       });
+<<<<<<< HEAD
       return { nouveau: data, nrp : dataNRP };
+=======
+      return { nouveau: data, nrp : dataNRP , leadagent : leadagent};
+>>>>>>> b618e5f (ddelo)
     }
 
     async getIdOneProspect() {
       const data = await this.prismaservice.pospects.findFirst({
         where: {
+<<<<<<< HEAD
           status: '0',
+=======
+          statuslead: '0',
+>>>>>>> b618e5f (ddelo)
         },
         orderBy: {
           id: 'desc',
@@ -78,7 +110,11 @@ export class PospectService {
       const data = await this.prismaservice.pospects.findFirst({
         where: {
            id_campagne: id,
+<<<<<<< HEAD
            status: '0',
+=======
+           statuslead: '0',
+>>>>>>> b618e5f (ddelo)
         },
         orderBy: {
           id: 'desc',
@@ -120,13 +156,22 @@ export class PospectService {
       return update;
     }
 
+<<<<<<< HEAD
     async updateNRP({ id }: { id: string }) {
+=======
+    async updateNRP({ id, idstatut }: { id: string , idstatut : string}) {
+>>>>>>> b618e5f (ddelo)
       const update = await this.prismaservice.pospects.update({
         where: {
           id,
         },
         data: {
+<<<<<<< HEAD
           status: "2"
+=======
+          status: idstatut,
+          statuslead: '1',
+>>>>>>> b618e5f (ddelo)
         },
       });
       return {message  : 'prospect Ne repond pas', data : update};

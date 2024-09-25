@@ -32,7 +32,6 @@ model Agents {
   historique    HistoriqueAffiches[]
   //piecejoint  PieceJoits[]
   //agentmodel    Modelmail[]
-  Logdata       Logdata[]
 }
 
 model Roles {
@@ -51,7 +50,6 @@ model Fonctions {
   fonctions         FonctionMenu[]
   menus             Menus[]
   Modules           Modules[]
-  CatgorieRole      CatgorieRole[]
 }
 
 model Menus {
@@ -75,11 +73,10 @@ model FonctionMenu {
 
 model Modules {
   id          String @id @default(cuid())
-  id_module   String
+  nom         String
   id_fonction String
 
   fonction         Fonctions?         @relation(fields: [id_fonction], references: [id])
-  moduleperso      ModulePerso?       @relation(fields: [id_module], references: [id])
   ModulesPrivilege ModulesPrivilege[]
 }
 
@@ -290,7 +287,7 @@ model Prospects {
 }
 
 model Pospects {
-  id               String  @id @default(cuid())
+  id               String @id @default(cuid())
   id_user          String
   nom              String
   code             String
@@ -301,9 +298,8 @@ model Pospects {
   ville            String
   codepostal       String
   surface          String
-  status           String?
+  status           String
   statusdossier    String
-  statuslead       String
   id_typechauffage String
   id_typerevenu    String
   id_campagne      String
@@ -317,7 +313,6 @@ model Pospects {
   capagnepospect Capamgnes    @relation(fields: [id_campagne], references: [id])
   produitpospect TypeProduits @relation(fields: [id_produit], references: [id])
   agentpospect   Agents       @relation(fields: [id_user], references: [id])
-  statutp        Status?      @relation(fields: [status], references: [id], onDelete: SetNull) // Relation optionnelle
 }
 
 model Modelmail {
@@ -379,8 +374,6 @@ model Logdata {
   latitude       Float?
   longitude      Float?
   createdAt      DateTime @default(now())
-
-  agent Agents @relation(fields: [user], references: [id])
 }
 
 model HistoriqueAffiches {
@@ -405,10 +398,6 @@ model EtapeWorkflows {
 
   CategorieWorkflows CategorieWorkflows[]
   workflow           Workflows?           @relation(fields: [id_work], references: [id])
-<<<<<<< HEAD
-=======
-  CatgorieRole       CatgorieRole[]
->>>>>>> b618e5f (ddelo)
 }
 
 model CategorieWorkflows {
@@ -418,14 +407,8 @@ model CategorieWorkflows {
   statut  String
   idetape String
 
-<<<<<<< HEAD
-  workflow     EtapeWorkflows? @relation(fields: [idetape], references: [id])
-  Status       Status[]
-  CatgorieRole CatgorieRole[]
-=======
   workflow EtapeWorkflows? @relation(fields: [idetape], references: [id])
   Status   Status[]
->>>>>>> b618e5f (ddelo)
 }
 
 model Status {
@@ -437,10 +420,6 @@ model Status {
   idcategorie String
 
   catworkflow CategorieWorkflows? @relation(fields: [idcategorie], references: [id])
-<<<<<<< HEAD
-=======
-  Pospects    Pospects[]
->>>>>>> b618e5f (ddelo)
 }
 
 model Workflows {
@@ -454,26 +433,7 @@ model Workflows {
 }
 
 model ModulePerso {
-  id      String    @id @default(cuid())
+  id      String @id @default(cuid())
   libelle String
   statut  String
-  Modules Modules[]
-}
-
-model CatgorieRole {
-<<<<<<< HEAD
-  id           String @id @default(cuid())
-  id_role      String
-  id_categorie String
-
-  categorie CategorieWorkflows? @relation(fields: [id_categorie], references: [id])
-  role      Fonctions?          @relation(fields: [id_role], references: [id])
-=======
-  id       String @id @default(cuid())
-  id_role  String
-  id_etape String
-
-  categorie EtapeWorkflows? @relation(fields: [id_etape], references: [id])
-  role      Fonctions?      @relation(fields: [id_role], references: [id])
->>>>>>> b618e5f (ddelo)
 }

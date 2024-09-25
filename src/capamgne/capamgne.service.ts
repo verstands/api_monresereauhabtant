@@ -92,6 +92,12 @@ export class CapamgneService {
       where: {
         id: id,
       },
+<<<<<<< HEAD
+=======
+      include : {
+         produit : true
+      }
+>>>>>>> b618e5f (ddelo)
     });
     return { data: campagne };
   }
