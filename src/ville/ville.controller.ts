@@ -12,7 +12,6 @@ import { VilleService } from './ville.service';
 import { VilleDto } from 'src/dto/ville.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
 @Controller('ville')
 export class VilleController {
   constructor(private readonly villeService: VilleService) {}

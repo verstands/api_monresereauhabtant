@@ -19,13 +19,8 @@ export class CapamgneController {
     getCampagne(@Param('id') id: string){
         return this.campagneservice.getcampagne({
             id,
-<<<<<<< HEAD
         })
-=======
-        },
-      )
->>>>>>> b618e5f (ddelo)
-    }
+    } 
 
     @Put(':id')
     updateagenda(@Param('id') id: string, @Body() agentUpdate: CapamgneDto) {

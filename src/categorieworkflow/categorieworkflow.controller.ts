@@ -10,6 +10,7 @@ export class CategorieworkflowController {
     get() {
       return this.roleservice.get();
     }
+
   
     @Get(':id')
     getApplication(@Param('id') id: string) {

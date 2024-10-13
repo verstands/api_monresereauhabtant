@@ -18,6 +18,16 @@ export class CategorieworkflowService {
     return { data: data };
   }
 
+  async getCat() {
+    const data = await this.prismaservice.etapeWorkflows.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+     
+    });
+    return { data: data };
+  }
+
   async getId({ id }: { id: string }) {
     const data = await this.prismaservice.categorieWorkflows.findUnique({
       where: {

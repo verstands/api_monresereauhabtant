@@ -405,10 +405,8 @@ model EtapeWorkflows {
 
   CategorieWorkflows CategorieWorkflows[]
   workflow           Workflows?           @relation(fields: [id_work], references: [id])
-<<<<<<< HEAD
-=======
   CatgorieRole       CatgorieRole[]
->>>>>>> b618e5f (ddelo)
+  status       Status[]
 }
 
 model CategorieWorkflows {
@@ -417,15 +415,8 @@ model CategorieWorkflows {
   libelle String
   statut  String
   idetape String
-
-<<<<<<< HEAD
-  workflow     EtapeWorkflows? @relation(fields: [idetape], references: [id])
-  Status       Status[]
-  CatgorieRole CatgorieRole[]
-=======
   workflow EtapeWorkflows? @relation(fields: [idetape], references: [id])
   Status   Status[]
->>>>>>> b618e5f (ddelo)
 }
 
 model Status {
@@ -435,12 +426,11 @@ model Status {
   libelle     String
   status      String
   idcategorie String
+  id_etape    String
 
   catworkflow CategorieWorkflows? @relation(fields: [idcategorie], references: [id])
-<<<<<<< HEAD
-=======
+  etape EtapeWorkflows? @relation(fields: [id_etape], references: [id])
   Pospects    Pospects[]
->>>>>>> b618e5f (ddelo)
 }
 
 model Workflows {
@@ -461,19 +451,10 @@ model ModulePerso {
 }
 
 model CatgorieRole {
-<<<<<<< HEAD
-  id           String @id @default(cuid())
-  id_role      String
-  id_categorie String
-
-  categorie CategorieWorkflows? @relation(fields: [id_categorie], references: [id])
-  role      Fonctions?          @relation(fields: [id_role], references: [id])
-=======
   id       String @id @default(cuid())
   id_role  String
   id_etape String
 
   categorie EtapeWorkflows? @relation(fields: [id_etape], references: [id])
   role      Fonctions?      @relation(fields: [id_role], references: [id])
->>>>>>> b618e5f (ddelo)
 }

@@ -6,14 +6,15 @@ import { PrismaService } from 'src/prisma.service';
 export class WorkflowService {
     constructor(private readonly prismaservice: PrismaService) {}
 
-  async get() {
-    const application = await this.prismaservice.workflows.findMany({
-      orderBy : {
-         ordre : "asc"
-      }
-    });
-    return { data: application };
-  }
+    async get() {
+      const application = await this.prismaservice.workflows.findMany({
+        orderBy: {
+          ordre: 'asc',
+        },
+        skip: 1, 
+      });
+      return { data: application };
+    }
 
   async getid({ id }: { id: string }) {
     const agenda = await this.prismaservice.workflows.findUnique({

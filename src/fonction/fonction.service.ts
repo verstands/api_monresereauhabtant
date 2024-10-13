@@ -51,22 +51,22 @@ export class FonctionService {
         });
         return createAgent;
     }
-<<<<<<< HEAD
-=======
 
-    async getStatutsByFonctionId(fonctionId: string) {
+
+    async getStatutsByFonctionId(fonctionId: string, id_workflow: string) {
       const data = await this.prismaservice.fonctions.findUnique({
         where: { id: fonctionId },
         select: {
           CatgorieRole: {
             select: {
-              // Relation avec EtapeWorkflows
-              categorie : {
+              categorie: {
+                where: {
+                  id_work: id_workflow 
+                },
                 select: {
-                  // Relation avec CategorieWorkflows
+                  libelle: true,
                   CategorieWorkflows: {
                     select: {
-                      // Relation avec Status
                       Status: {
                         select: {
                           id: true,
@@ -87,5 +87,6 @@ export class FonctionService {
     
       return { data };
     }
->>>>>>> b618e5f (ddelo)
+    
+    
 }

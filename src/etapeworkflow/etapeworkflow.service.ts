@@ -8,9 +8,23 @@ export class EtapeworkflowService {
 
     async get() {
       const data = await this.prismaservice.etapeWorkflows.findMany({
+        skip: 1, 
         orderBy:{
-            "id" : "desc"
+            "id" : "asc"
         },
+      });
+      return { data: data };
+    }
+
+    async getCat() {
+      const data = await this.prismaservice.etapeWorkflows.findMany({
+        skip: 1, 
+        orderBy:{
+            "id" : "asc"
+        },
+        include : {
+          CategorieWorkflows : true,
+        }
       });
       return { data: data };
     }

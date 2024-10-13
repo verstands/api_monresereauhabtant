@@ -12,14 +12,15 @@ export class FonctionController {
     get() {
       return this.roleservice.get();
     }
-<<<<<<< HEAD
-=======
 
-    @Get('statuts/:id')
-  async getStatutsByFonctionId(@Param('id') id: string) {
-    return this.roleservice.getStatutsByFonctionId(id);
-  }
->>>>>>> b618e5f (ddelo)
+    @Get('statuts/:id/:id_workflow')
+    async getStatutsByFonctionId(
+      @Param('id') id: string,
+      @Param('id_workflow') id_workflow: string
+    ) {
+      return this.roleservice.getStatutsByFonctionId(id, id_workflow);
+    }
+    
   
     @Get(':id')
     getApplication(@Param('id') id: string) {

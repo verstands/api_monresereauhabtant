@@ -10,6 +10,7 @@ export class EtapeworkflowController {
     get() {
       return this.roleservice.get();
     }
+
   
     @Get(':id')
     getApplication(@Param('id') id: string) {
@@ -23,6 +24,11 @@ export class EtapeworkflowController {
       return this.roleservice.getWorkflow({
         id,
       });
+    }
+
+    @Get('cat/cat')
+    getCat() {
+      return this.roleservice.getCat();
     }
    
   

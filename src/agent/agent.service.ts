@@ -64,11 +64,7 @@ export class AgentService {
   async getAgentsByFonctions(fonctionIds: number[] | string[]) {
     const agents = await this.prismaservice.agents.findMany({
       where: {
-<<<<<<< HEAD
-        id_fonction: {
-=======
         id: {
->>>>>>> b618e5f (ddelo)
           in: fonctionIds.map(String),
         },  
       },

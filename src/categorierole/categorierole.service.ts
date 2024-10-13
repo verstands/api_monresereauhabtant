@@ -31,11 +31,7 @@ export class CategorieroleService {
       },
       include : {
         role : true,
-<<<<<<< HEAD
         categorie : true, 
-=======
-        categorie : true,
->>>>>>> b618e5f (ddelo)
       }
     });
     return { data: data };

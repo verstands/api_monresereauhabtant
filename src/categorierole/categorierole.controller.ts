@@ -10,6 +10,8 @@ export class CategorieroleController {
     get() {
       return this.roleservice.get();
     }
+
+   
   
     @Get(':id')
     getApplication(@Param('id') id: string) {

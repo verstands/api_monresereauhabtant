@@ -17,7 +17,12 @@ export class StatusDto {
   })
   status: string;
   @IsNotEmpty({
-    message: 'Le champ categorieom est obligatoire',
+    message: 'Le champ categorie est obligatoire',
   })
   idcategorie: string;
+
+  @IsNotEmpty({
+    message: 'Le champ etape workflow est obligatoire',
+  })
+  id_etape: string;
 }

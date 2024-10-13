@@ -34,6 +34,11 @@ export class PospectController {
     return this.roleservice.getIdOneProspect();
   }
 
+  @Get('one/one/:id')
+  getIdOneId(@Param('id') id: string) {
+    return this.roleservice.getIdOneProspects(id);
+  }
+
   @Get('oneCampagne/oneCampagne/:id')
   getIdOneCampagne(@Param('id') id: string) {
     return this.roleservice.getIdOneProspectCampagne({
@@ -41,15 +46,22 @@ export class PospectController {
     });
   }
 
-<<<<<<< HEAD
-  @Get('countNouveau/countNouveau')
-  getcountNouveau() {
-    return this.roleservice.getcountNouveau();
-=======
+  @Get('oneCampagne/oneCampagne/:id/:id_user')
+  getIdOneCampagneID(
+    @Param('id') id: string,
+    @Param('id_user') id_user: string
+  ) {
+    return this.roleservice.getIdOneProspectCampagneId({
+      id,
+      id_user,
+    });
+  }
+
+
+
   @Get('countNouveau/countNouveau/:id')
   getcountNouveau(@Param('id') id: string) {
     return this.roleservice.getcountNouveau({id});
->>>>>>> b618e5f (ddelo)
   }
 
   @Get(':id')
@@ -59,18 +71,11 @@ export class PospectController {
     });
   }
 
-<<<<<<< HEAD
-  @Put('nrp/:id')
-  updatenrp(@Param('id') id: string) {
-    return this.roleservice.updateNRP({ id });
-  }
-=======
   @Put('nrp/:id/:idstatut')
   updatenrp(@Param('id') id: string, @Param('idstatut') idstatut: string) {
     return this.roleservice.updateNRP({ id, idstatut });
   }
   
->>>>>>> b618e5f (ddelo)
 
   @Put('rdv/:id')
   updaterdv(@Param('id') id: string) {

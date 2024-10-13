@@ -12,12 +12,22 @@ export class DossierController {
     get() {
       return this.roleservice.get();
     }
+
+    @Get('/one')
+    getOne() {
+      return this.roleservice.getOne();
+    }
   
     @Get(':id')
     getApplication(@Param('id') id: string) {
       return this.roleservice.getId({
         id,
       });
+    }
+
+    @Get('by-role/:id_role')
+    async getProspectsByRole(@Param('id_role') id_role: string) {
+      return this.roleservice.findProspectsByRole(id_role);
     }
     
     @Put(':id')
