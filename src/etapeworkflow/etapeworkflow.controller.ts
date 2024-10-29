@@ -19,6 +19,11 @@ export class EtapeworkflowController {
       });
     }
 
+    @Get('etape/etape')
+    getwork() {
+      return this.roleservice.getworkflowetape();
+    }
+
     @Get('work/:id')
     getEtape(@Param('id') id: string) {
       return this.roleservice.getWorkflow({

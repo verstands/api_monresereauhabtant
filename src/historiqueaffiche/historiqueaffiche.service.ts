@@ -15,6 +15,9 @@ export class HistoriqueafficheService {
       orderBy: {
         id: 'desc',
       },
+      include : {
+        agent : true
+      }
     });
     return { data: data };
   }

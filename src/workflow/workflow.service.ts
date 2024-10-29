@@ -11,10 +11,21 @@ export class WorkflowService {
         orderBy: {
           ordre: 'asc',
         },
-        skip: 1, 
+        include: {
+          etape: true, // Inclure les étapes
+        },
+        skip: 1,
       });
-      return { data: application };
+    
+      // Transformer les données pour inclure le nombre d'étapes pour chaque workflow
+      const workflowsWithEtapeCount = application.map((workflow) => ({
+        ...workflow,
+        etapeCount: workflow.etape.length, // Compter le nombre d'étapes
+      }));
+    
+      return { data: workflowsWithEtapeCount };
     }
+    
 
   async getid({ id }: { id: string }) {
     const agenda = await this.prismaservice.workflows.findUnique({

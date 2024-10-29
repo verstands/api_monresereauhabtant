@@ -121,4 +121,19 @@ export class PospectController {
   async createAgenda(@Body() agendadto: PospectDto) {
     return await this.roleservice.create(agendadto);
   }
+
+  @Get('status/campagne/:id')
+  getIdStatucampagne(@Param('id') id: string) {
+    return this.roleservice.getCountStatusByCampagne(id);
+  }
+
+  @Get('suivileadagent/:id')
+  getSuivileadAgent(@Param('id') id: string) {
+    return this.roleservice.getSuiviLeadAgent({ id });
+  }
+
+  @Get('suivilead')
+  async getSuiviLead(@Query() paginationdto: PaginationDto) {
+    return this.roleservice.getSuiviLead(paginationdto);
+  }
 }

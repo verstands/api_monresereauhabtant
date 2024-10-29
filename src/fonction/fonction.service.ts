@@ -67,6 +67,7 @@ export class FonctionService {
                   libelle: true,
                   CategorieWorkflows: {
                     select: {
+                      libelle : true,
                       Status: {
                         select: {
                           id: true,

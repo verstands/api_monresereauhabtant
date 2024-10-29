@@ -16,6 +16,39 @@ export class EtapeworkflowService {
       return { data: data };
     }
 
+    async getworkflowetape() {
+      const data = await this.prismaservice.workflows.findMany({
+        skip: 1,
+        orderBy: {
+          id: "asc",
+        },
+        include: {
+          etape: {
+            include: {
+              CategorieWorkflows: true, // Inclure les catégories dans chaque étape
+            },
+          },
+        },
+      });
+    
+      // Transformer les données pour inclure le nombre réel de catégories
+      const workflowsWithCategoryCount = data.map((workflow) => {
+        const etapesWithCategoryCount = workflow.etape.map((etape) => ({
+          ...etape,
+          categoryCount: etape.CategorieWorkflows.length, // Compter le nombre réel de catégories
+        }));
+    
+        return {
+          ...workflow,
+          etape: etapesWithCategoryCount,
+        };
+      });
+    
+      return { data: workflowsWithCategoryCount };
+    }
+    
+    
+
     async getCat() {
       const data = await this.prismaservice.etapeWorkflows.findMany({
         skip: 1, 

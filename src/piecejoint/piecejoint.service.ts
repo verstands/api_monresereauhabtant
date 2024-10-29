@@ -14,7 +14,7 @@ export class PiecejointService {
       },
     });
   
-    const baseUrl = 'http://localhost:4000/uploads';
+    const baseUrl = 'http://185.182.186.58:4000/uploads';
   
     const filesWithUrls = data.map((pieceJoint) => {
       const fileUrl = `${baseUrl}/${pieceJoint.file}`;

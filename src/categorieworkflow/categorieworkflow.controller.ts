@@ -11,6 +11,10 @@ export class CategorieworkflowController {
       return this.roleservice.get();
     }
 
+    @Get('cat/cat')
+    getCat() {
+      return this.roleservice.getCat();
+    }
   
     @Get(':id')
     getApplication(@Param('id') id: string) {

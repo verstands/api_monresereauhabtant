@@ -14,77 +14,77 @@ export class CapamgneService {
       },
       include: {
         produit: true,
+        pospects: true, 
       },
     });
   
-    const campagnesWithStatusCounts = await Promise.all(
-      campagnes.map(async (campagne) => {
-        const status1Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '1',
-          },
-        });
+    const campagnesWithProspectCount = campagnes.map(campagne => {
+      const totalProspects = campagne.pospects.length;
+      const prospectsWithStatusLead1 = campagne.pospects.filter(
+        (prospect) => prospect.statuslead === '1'
+      ).length;
+      const prospectsWithStatusLead0 = campagne.pospects.filter(
+        (prospect) => prospect.statuslead === '0'
+      ).length;
   
-        const status2Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '2',
-          },
-        });
-  
-        const status3Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '3',
-          },
-        });
-
-        const status4Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '4',
-          },
-        });
-
-        const status5Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '5',
-          },
-        });
-
-        const status6Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '6',
-          },
-        });
-
-        const status7Count = await this.prismaservice.pospects.count({
-          where: {
-            id_campagne: campagne.id,
-            status: '7',
-          },
-        });
-  
-        return {
-          ...campagne,
-          statusCounts: {
-            status1: status1Count,
-            status2: status2Count,
-            status3: status3Count,
-            status4: status4Count,
-            status5: status5Count,
-            status6: status6Count,
-            status7: status7Count,
-          },
-        };
-      })
-    );
-  
-    return { data: campagnesWithStatusCounts };
+      return {
+        id: campagne.id,
+        titre: campagne.titre,
+        id_produit: campagne.id_produit,
+        produit: campagne.produit,
+        statut: campagne.statut,
+        totalProspects: totalProspects, 
+        statusLead1Count: prospectsWithStatusLead1, 
+        statusLead0Count: prospectsWithStatusLead0, 
+      };
+    });
+    
+    return { data: campagnesWithProspectCount };
   }
+
+  async getcampagnesAgent({ id }: { id: string }) {
+    const campagnes = await this.prismaservice.capamgnes.findMany({
+      where: {
+          pospects: {
+              some: { 
+                  id_user: id
+              }
+          }
+      },
+      orderBy: {
+          id: 'desc',
+      },
+      include: {
+          produit: true,
+          pospects: true, 
+      },
+  });
+  
+    const campagnesWithProspectCount = campagnes.map(campagne => {
+      const totalProspects = campagne.pospects.length;
+      const prospectsWithStatusLead1 = campagne.pospects.filter(
+        (prospect) => prospect.statuslead === '1'
+      ).length;
+      const prospectsWithStatusLead0 = campagne.pospects.filter(
+        (prospect) => prospect.statuslead === '0'
+      ).length;
+  
+      return {
+        id: campagne.id,
+        titre: campagne.titre,
+        id_produit: campagne.id_produit,
+        produit: campagne.produit,
+        statut: campagne.statut,
+        totalProspects: totalProspects, 
+        statusLead1Count: prospectsWithStatusLead1, 
+        statusLead0Count: prospectsWithStatusLead0, 
+      };
+    });
+    
+    return { data: campagnesWithProspectCount };
+  }
+  
+  
   
 
   async getcampagne({ id }: { id: string }) {

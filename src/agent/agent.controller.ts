@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AgentService } from './agent.service';
@@ -44,4 +45,11 @@ export class AgentController {
     const { fonctionIds } = body;
     return this.agentService.getAgentsByFonctions(fonctionIds);
   }
+
+  @Post('by-ids')
+  getAgentsByIds(@Body() body: { fonctionIds: string[] }) {
+    const { fonctionIds } = body;
+    return this.agentService.getAgentsByIdsFonction(fonctionIds);
+  }
+  
 }

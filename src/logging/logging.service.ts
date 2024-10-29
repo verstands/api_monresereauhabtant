@@ -29,7 +29,7 @@ export class LoggingService {
   async get(paginationdto: PaginationDto) {
     const { skip, limit } = paginationdto;
     const validSkip = Number.isInteger(skip) ? skip : 0;
-    const validTake = Number.isInteger(limit) ? limit : 20;
+    const validTake = Number.isInteger(limit) ? limit : 50;
   
     const data = await this.prismaService.logdata.findMany({
       orderBy: {

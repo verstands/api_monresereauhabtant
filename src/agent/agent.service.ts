@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AgentInterface } from 'src/dto/agent.dto';
 import { PrismaService } from 'src/prisma.service';
 
@@ -74,4 +74,20 @@ export class AgentService {
     });
     return { data: agents };
   }
+
+  async getAgentsByIdsFonction(fonctionIds: number[] | string[]) {
+    const agents = await this.prismaservice.agents.findMany({
+      where: {
+        id_fonction: {
+          in: fonctionIds.map(String),
+        },
+      },
+      include: {
+        fonction: true
+      }
+    });
+  
+    return { data: agents };
+  }
+  
 }

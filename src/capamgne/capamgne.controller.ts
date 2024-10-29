@@ -15,6 +15,13 @@ export class CapamgneController {
         return this.campagneservice.getcampagnes();
     }
 
+    @Get('agent/:id')
+    getCampagneUser(@Param('id') id: string){
+        return this.campagneservice.getcampagnesAgent({
+            id,
+        })
+    } 
+
     @Get(':id')
     getCampagne(@Param('id') id: string){
         return this.campagneservice.getcampagne({

@@ -1,7 +1,7 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { LoggingService } from './logging.service';
 import { map, Observable } from 'rxjs';
-import { endpointMessages } from './url-messages'; // Importez le fichier contenant les messages
+import { endpointMessages } from './url-messages';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -12,11 +12,14 @@ export class LoggingInterceptor implements NestInterceptor {
     const response = context.switchToHttp().getResponse();
     const now = Date.now();
 
+    if (request.url === '/auth/login') {
+      return next.handle();
+    }
+
     const userAgent = request.headers['user-agent'];
     const latitude = request.headers['x-latitude'];
     const longitude = request.headers['x-longitude'];
 
-    
     const endpointMessage = this.getEndpointMessage(request.url);
 
     console.log(`Incoming request: ${request.method} ${endpointMessage}`);
@@ -34,8 +37,8 @@ export class LoggingInterceptor implements NestInterceptor {
 
         await this.loggingService.create({
           action: request.method,
-          endpoint: endpointMessage, 
-          user: request.headers['x-user'] || 'Anonymous', 
+          endpoint: endpointMessage,
+          user: request.headers['x-user'] || 'Anonymous',
           processingTime,
           ip: request.headers['x-ip'],
           userAgent,
@@ -54,9 +57,7 @@ export class LoggingInterceptor implements NestInterceptor {
     );
   }
 
-  // Méthode pour récupérer le message correspondant à l'URL
   private getEndpointMessage(url: string): string {
-    // Retirez les paramètres dynamiques pour correspondre aux routes
     const cleanUrl = url.split('?')[0].replace(/\/\d+$/, '/:id');
     return endpointMessages[cleanUrl] || url;
   }

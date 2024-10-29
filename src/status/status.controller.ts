@@ -14,6 +14,11 @@ export class StatusController {
     return this.statusservice.getSatus();
   }
 
+  @Get('campagne/prospect/:id')
+  getstatutcampagneprospect(@Param('id') id: string) {
+    return this.statusservice.viewstattuCampagne(id);
+  }
+
   @Get(':id')
   getApplication(@Param('id') id: string) {
     return this.statusservice.getStatu({

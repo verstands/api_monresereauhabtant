@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class StatusService {
-    constructor(private readonly prismaservice: PrismaService) {}
+  constructor(private readonly prismaservice: PrismaService) { }
 
   async getSatus() {
     const application = await this.prismaservice.status.findMany({});
@@ -55,5 +55,17 @@ export class StatusService {
       data: dataS
     });
     return createAgent;
+  }
+
+  async viewstattuCampagne(id_campagne: string) {
+    const data = await this.prismaservice.status.findMany({
+      orderBy: {
+        "id": "desc"
+      },
+      include: {
+        Pospects: true
+      },
+    });
+    return { data: data };
   }
 }
