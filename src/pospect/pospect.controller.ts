@@ -132,8 +132,8 @@ export class PospectController {
     return this.roleservice.getSuiviLeadAgent({ id });
   }
 
-  @Get('suivilead')
-  async getSuiviLead(@Query() paginationdto: PaginationDto) {
-    return this.roleservice.getSuiviLead(paginationdto);
+  @Get('suivileads')
+  async getSuiviLead() {
+    return this.roleservice.getSuiviLead();
   }
 }

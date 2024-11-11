@@ -22,20 +22,14 @@ export class PospectService {
         produitpospect: true,
         statutp: true,
       },
-      skip: paginationdto.skip,
-      take: paginationdto.limit ?? DEFAULT_PAGE_SIZE
+      skip: Number(paginationdto.skip), 
+      take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,
     });
     return { data: data };
   }
 
-  async getSuiviLead(paginationdto: PaginationDto) {
+  async getSuiviLead() {
     const data = await this.prismaservice.pospects.findMany({
-      where: {
-        statuslead: {
-          not: "0",
-        },
-      },
-
       orderBy: {
         "id": "desc"
       },
@@ -44,10 +38,10 @@ export class PospectService {
         capagnepospect: true,
         produitpospect: true,
         statutp: true,
-      },
-      skip: paginationdto.skip,
-      take: paginationdto.limit ?? DEFAULT_PAGE_SIZE
+
+      }
     });
+    console.log('dataaaaaaaaaaaaa',)
     return { data: data };
   }
 
@@ -63,7 +57,8 @@ export class PospectService {
       include: {
         agentpospect: true,
         capagnepospect: true,
-        produitpospect: true
+        produitpospect: true,
+        statutp: true,
       }
     });
     return { data: data };
@@ -83,7 +78,9 @@ export class PospectService {
       include: {
         agentpospect: true,
         capagnepospect: true,
-        produitpospect: true
+        produitpospect: true,
+        statutp: true,
+
       }
     });
     return { data: data };
@@ -99,14 +96,19 @@ export class PospectService {
 
     const leadagent = await this.prismaservice.pospects.count({
       where: {
-        id_user: id
-      },
+        OR: [
+          { id_user: id },
+          { 
+            id_confirmateur: id, 
+            statuslead : "1" 
+          }
+        ]
+      }
     });
 
     const leadagentNRP = await this.prismaservice.pospects.count({
       where: {
         id_user: id,
-
       },
     });
 
@@ -116,7 +118,7 @@ export class PospectService {
       },
     });
 
-    return { nouveau: data, nrp: dataNRP, leadagent: leadagent };
+    return { nouveau: data, nrp: dataNRP, leadagent: leadagent,  };
   }
 
   async getIdOneProspect() {

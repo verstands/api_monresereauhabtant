@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { PaginationDto } from 'src/dto/paginationPage.dto';
 import { PospectDto } from 'src/dto/pospect.dto';
 import { PrismaService } from 'src/prisma.service';
+import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 
 @Injectable()
 export class DossierService {
@@ -76,9 +78,10 @@ export class DossierService {
       return { message: 'prospect supprimé avec success ' };
     }
     
-    async findProspectsByRole(id_role: string) {
+    async findProspectsByRole(id_role: string, paginationdto: PaginationDto, iduser : string) {
       return this.prismaservice.pospects.findMany({
         where: {
+          id_confirmateur : iduser,
           statutp: {
             etape: {
               CatgorieRole: {
@@ -104,6 +107,8 @@ export class DossierService {
             },
           },
         },
+        skip: Number(paginationdto.skip), 
+        take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,
       });
     }
     

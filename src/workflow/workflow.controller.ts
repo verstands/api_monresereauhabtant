@@ -11,6 +11,11 @@ export class WorkflowController {
     return this.workflow.get();
   }
 
+  @Get('workffowagent/:id')
+  getworkflowagent(@Param('id') id: string) {
+    return this.workflow.getAgent(id);
+  }
+
   @Get(':id')
   getApplication(@Param('id') id: string) {
     return this.workflow.getid({

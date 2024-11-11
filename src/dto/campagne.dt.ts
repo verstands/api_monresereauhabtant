@@ -31,6 +31,9 @@ export class CapamgneDto {
  @IsOptional()
   distribue: string
 
+  @IsOptional()
+  idgroupe: string
+
  @IsOptional()
   restant: string
 }

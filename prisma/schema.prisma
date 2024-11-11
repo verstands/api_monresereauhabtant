@@ -27,12 +27,14 @@ model Agents {
   dossiers      Dossiers[]
   commentaires  Commentaires[]
   agentprospect Prospects[]
-  agentpospect  Pospects[]
+  agentpospect  Pospects[]           @relation("AgentPrincipal")
+  confirmateur  Pospects[]           @relation("AgentConfirmateur")
   notification  Notifications[]
   historique    HistoriqueAffiches[]
   //piecejoint  PieceJoits[]
   //agentmodel    Modelmail[]
   Logdata       Logdata[]
+  GroupeUser    GroupeUser[]
 }
 
 model Roles {
@@ -121,7 +123,9 @@ model Capamgnes {
   id         String       @id @default(cuid())
   titre      String
   id_produit String
+  idgroupe   String
   produit    TypeProduits @relation(fields: [id_produit], references: [id])
+  groupe     Groupes      @relation(fields: [idgroupe], references: [id])
   statut     String
   nouveau    String
   nrp        String
@@ -309,6 +313,7 @@ model Pospects {
   id_campagne      String
   id_produit       String
   typelead         String
+  id_confirmateur  String
 
   pospect     Agendas[]
   commenatire Commentaires[]
@@ -316,8 +321,9 @@ model Pospects {
 
   capagnepospect Capamgnes    @relation(fields: [id_campagne], references: [id])
   produitpospect TypeProduits @relation(fields: [id_produit], references: [id])
-  agentpospect   Agents       @relation(fields: [id_user], references: [id])
-  statutp        Status?      @relation(fields: [status], references: [id], onDelete: SetNull) // Relation optionnelle
+  agentpospect   Agents       @relation("AgentPrincipal", fields: [id_user], references: [id])
+  confirmateur   Agents       @relation("AgentConfirmateur", fields: [id_confirmateur], references: [id])
+  statutp        Status?      @relation(fields: [status], references: [id], onDelete: SetNull)
 }
 
 model Modelmail {
@@ -406,15 +412,15 @@ model EtapeWorkflows {
   CategorieWorkflows CategorieWorkflows[]
   workflow           Workflows?           @relation(fields: [id_work], references: [id])
   CatgorieRole       CatgorieRole[]
-  status       Status[]
+  status             Status[]
 }
 
 model CategorieWorkflows {
-  id      String @id @default(cuid())
-  ordre   String
-  libelle String
-  statut  String
-  idetape String
+  id       String          @id @default(cuid())
+  ordre    String
+  libelle  String
+  statut   String
+  idetape  String
   workflow EtapeWorkflows? @relation(fields: [idetape], references: [id])
   Status   Status[]
 }
@@ -429,7 +435,7 @@ model Status {
   id_etape    String
 
   catworkflow CategorieWorkflows? @relation(fields: [idcategorie], references: [id])
-  etape EtapeWorkflows? @relation(fields: [id_etape], references: [id])
+  etape       EtapeWorkflows?     @relation(fields: [id_etape], references: [id])
   Pospects    Pospects[]
 }
 
@@ -457,4 +463,20 @@ model CatgorieRole {
 
   categorie EtapeWorkflows? @relation(fields: [id_etape], references: [id])
   role      Fonctions?      @relation(fields: [id_role], references: [id])
+}
+
+model Groupes {
+  id         String       @id @default(cuid())
+  nom        String
+  GroupeUser GroupeUser[]
+  Capamgnes  Capamgnes[]
+}
+
+model GroupeUser {
+  id        String @id @default(cuid())
+  id_groupe String
+  id_agent  String
+
+  groupe      Groupes? @relation(fields: [id_groupe], references: [id])
+  agentgroupe Agents?  @relation(fields: [id_agent], references: [id])
 }

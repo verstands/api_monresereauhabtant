@@ -43,6 +43,8 @@ import { CategorieworkflowModule } from './categorieworkflow/categorieworkflow.m
 import { WorkflowModule } from './workflow/workflow.module';
 import { ModulepersoModule } from './moduleperso/moduleperso.module';
 import { CategorieroleModule } from './categorierole/categorierole.module';
+import { GroupeModule } from './groupe/groupe.module';
+import { GroupeuserModule } from './groupeuser/groupeuser.module';
 
 
 @Module({
@@ -91,6 +93,8 @@ import { CategorieroleModule } from './categorierole/categorierole.module';
     WorkflowModule,
     ModulepersoModule,
     CategorieroleModule,
+    GroupeModule,
+    GroupeuserModule,
   ],
 })
 export class AppModule {}

@@ -12,6 +12,9 @@ export class EtapeworkflowService {
         orderBy:{
             "id" : "asc"
         },
+        include : {
+          CategorieWorkflows : true
+        }
       });
       return { data: data };
     }

@@ -38,6 +38,9 @@ export class PospectDto {
   id_campagne: string;
 
   @IsOptional()
+  id_confirmateur: string;
+
+  @IsOptional()
   id_produit: string;
   
   @IsOptional()

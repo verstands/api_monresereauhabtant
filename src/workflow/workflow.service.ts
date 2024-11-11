@@ -12,19 +12,45 @@ export class WorkflowService {
           ordre: 'asc',
         },
         include: {
-          etape: true, // Inclure les étapes
+          etape: true, 
         },
         skip: 1,
       });
     
-      // Transformer les données pour inclure le nombre d'étapes pour chaque workflow
       const workflowsWithEtapeCount = application.map((workflow) => ({
         ...workflow,
-        etapeCount: workflow.etape.length, // Compter le nombre d'étapes
+        etapeCount: workflow.etape.length, 
       }));
     
       return { data: workflowsWithEtapeCount };
     }
+
+    async getAgent(id: string) {
+      const application = await this.prismaservice.workflows.findMany({
+        where: {
+          etape: {
+            some : {
+              CatgorieRole : {
+                some : {
+                  id_role : id
+                }
+              }
+            }
+          },
+        },
+        orderBy: {
+          ordre: 'asc',
+        },
+        include: {
+          etape: true,
+        },
+        skip: 1,
+      });
+    
+      return { data: application };
+    }
+    
+    
     
 
   async getid({ id }: { id: string }) {

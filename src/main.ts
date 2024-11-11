@@ -21,10 +21,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   //const loggingService = app.get(LoggingService);
-  //app.useGlobalInterceptors(new LoggingInterceptor(loggingService));
+ // app.useGlobalInterceptors(new LoggingInterceptor(loggingService));
 
   const port = 4000;
-  await app.listen(port);
+  await app.listen(port); 
 }
 bootstrap();
 
