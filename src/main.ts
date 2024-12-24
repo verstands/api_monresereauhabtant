@@ -20,8 +20,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
 
-  //const loggingService = app.get(LoggingService);
- // app.useGlobalInterceptors(new LoggingInterceptor(loggingService));
+  const loggingService = app.get(LoggingService);
+  app.useGlobalInterceptors(new LoggingInterceptor(loggingService));
 
   const port = 4000;
   await app.listen(port); 

@@ -7,4 +7,4 @@ import { PrismaService } from 'src/prisma.service';
   providers: [DossierService, PrismaService],
   controllers: [DossierController]
 })
-export class DossierModule {}
+export class DossierModule {} 
