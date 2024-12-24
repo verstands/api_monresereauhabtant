@@ -1,0 +1,189 @@
+INSERT INTO `Fonctions` (`id`, `initule`) VALUES
+('clycuhh4e0000bevxv9wxz4ds', 'Administrateur'),
+('cm37fhz2w001pb4gh5lqdaqwe', 'Agent'),
+('cm37fihvx001qb4ghp8vwbogq', 'Confirmateur'),
+('cm3iuw59p002bgdot12krsgh1', 'Agent administratif');
+
+INSERT INTO `Applications` (`id`, `titre`, `image`, `lien`) VALUES
+('clycuin1v0001bevxyst71960', 'Commercial', 'https://cdn.icon-icons.com/icons2/5/PNG/256/home_243.png', '/bcommercial'),
+('clycujl0l0002bevxnpub2ajr', 'Agent', 'https://cdn.icon-icons.com/icons2/11/PNG/256/customer_person_people_man_user_client_1629.png', '/bagent');
+
+INSERT INTO `Menus` (`id`, `nom`, `icon`, `url`) VALUES
+('cm0o014120002xz1fscf5mfi4', 'Agenda', 'agenda', '/agenda'),
+('cm0o02kn60003xz1fmyqktpqj', 'Plannig RDV', 'planning', '/agenda'),
+('cm0o03e5n0004xz1fvll4lhi0', 'Dossiers', 'dossier', '/dossiers'),
+('cm0o043z30005xz1fc2ick3us', 'Prospects', 'prospect', '/viewProspect'),
+('cm0o04lvc0006xz1fgbolquod', 'CDR', 'cdr', '/viewCdr'),
+('cm0o05w5u0007xz1fzlf58tts', 'Appel automatique', 'appel', '/appels'),
+('cm0o06m2g0008xz1fwt2v4vtm', 'Campagne', 'campagne', '/viewCapagne'),
+('cm20l4j1d0000wg4ashvqi960', 'Appel automatique dossier', 'appel', '/bagentd'),
+('cm20l4j1d0000wg4ashvqi963', 'Suivis', 'suivi', '/suivilead');
+
+INSERT INTO `FonctionMenu` (`id`, `idmenu`, `idfonction`) VALUES
+('cm0o0az06000axz1fdigefoiv', 'cm0o014120002xz1fscf5mfi4', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm0o0b7bk000cxz1fuj3swqat', 'cm0o02kn60003xz1fmyqktpqj', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm0o0bf9p000exz1f5xtatyx2', 'cm0o03e5n0004xz1fvll4lhi0', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm0o0bqy3000gxz1f7hf5ae31', 'cm0o043z30005xz1fc2ick3us', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm0o0c247000ixz1flnkvmj9g', 'cm0o04lvc0006xz1fgbolquod', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm0o0c8yc000kxz1ft93h9w68', 'cm0o05w5u0007xz1fzlf58tts', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm0o0chk5000mxz1f0fflcfuq', 'cm0o06m2g0008xz1fwt2v4vtm', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm20la6c10002wg4ajbzjsdgt', 'cm20l4j1d0000wg4ashvqi960', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm2t3x2h3001zv3xohxsk231t', 'cm20l4j1d0000wg4ashvqi963', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm37iwkkn000dkg69bgt49xs1', 'cm0o06m2g0008xz1fwt2v4vtm', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3c9r77u001v11o9ab376mst', 'cm0o043z30005xz1fc2ick3us', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3czb0p5003r11o9zfpmypyi', 'cm0o03e5n0004xz1fvll4lhi0', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3d2v3ev0001p125jvdyfuwa', 'cm20l4j1d0000wg4ashvqi963', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3df10so0003gdot37fks7td', 'cm0o03e5n0004xz1fvll4lhi0', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3dg5dzw0009gdotcfd5806f', 'cm0o043z30005xz1fc2ick3us', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3dg5x7m000dgdot6ox7anyv', 'cm0o05w5u0007xz1fzlf58tts', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3eosvwu001xgdoty30sgzf5', 'cm0o05w5u0007xz1fzlf58tts', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3ivf67r002zgdotpx7oi3tk', 'cm0o03e5n0004xz1fvll4lhi0', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivfnkx0031gdot1y3vv0ye', 'cm20l4j1d0000wg4ashvqi963', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivg4gi0033gdot9sarn3o5', 'cm20l4j1d0000wg4ashvqi960', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivh61s0035gdot9si6s23f', 'cm0o06m2g0008xz1fwt2v4vtm', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivjlwo0037gdotzkl5veu6', 'cm0o06m2g0008xz1fwt2v4vtm', 'cm37fihvx001qb4ghp8vwbogq');
+
+INSERT INTO `Accesapplications` (`id`, `id_user`, `id_application`) VALUES
+('clyculxkz0004bevx30wa8s5s', 'clycuhh4e0000bevxv9wxz4ds', 'clycujl0l0002bevxnpub2ajr'),
+('clycum9i40006bevxd8199riw', 'clycuhh4e0000bevxv9wxz4ds', 'clycuin1v0001bevxyst71960'),
+('cm37iumnh0009kg69czr0lsdv', 'cm37fhz2w001pb4gh5lqdaqwe', 'clycujl0l0002bevxnpub2ajr'),
+('cm391ddm00012kg691z30zckh', 'cm37fihvx001qb4ghp8vwbogq', 'clycujl0l0002bevxnpub2ajr'),
+('cm3iv653r002jgdot7828mno0', 'cm3iuw59p002bgdot12krsgh1', 'clycujl0l0002bevxnpub2ajr');
+
+INSERT INTO `Agents` (`id`, `nom`, `prenom`, `mdp`, `id_fonction`, `statut`, `email`) VALUES
+('clycuhh4e0000bevxv9wxz4fq', 'Kikwele', 'Roland', '$2b$10$FBYc3Mp2VRSTyG6hNM.SwepP9OGduXNan5kB3zfeFbqvLdFGHu8ZK', 'clycuhh4e0000bevxv9wxz4ds', '1', 'rabbys@gmail.com'),
+('clycuhh4e0000bevxv9wxz4fu', 'Kali', 'Rabby', '$2b$10$FBYc3Mp2VRSTyG6hNM.SwepP9OGduXNan5kB3zfeFbqvLdFGHu8ZK', 'clycuhh4e0000bevxv9wxz4ds', '1', 'rabby@gmail.com');
+
+INSERT INTO `Roles` (`id`, `initule`) VALUES
+('clyh5sxie0000adchqlbqk3bi', 'create'),
+('clyh5tapk0001adch32ibng0o', 'read'),
+('clyh5thd20002adchvbmjryxb', 'delete'),
+('clyh5tlk40003adchnsptf7ks', 'update'),
+('clyh5tq5r0004adch1mdjlcap', 'all'),
+('clyh5tq5r0004adch1sdj4cap', 'print');
+
+INSERT INTO `Workflows` (`id`, `ordre`, `libelle`, `statut`) VALUES
+('cm0v2ftr50009124suxegkexs', '2', 'ABC', '1'),
+('cm1wn0tb80026wgrl01jsr9z2', '1', 'Financement', '1'),
+('cm1z40h7t00gbwgrlnkm81x0n', '2', 'Rénovation d\'ampleur', '1'),
+('cm2nit58q0003d04fk3qiklho', '3', 'THERMOSTAT', '1');
+
+INSERT INTO `EtapeWorkflows` (`id`, `ordre`, `couleur`, `libelle`, `statut`, `description`, `id_work`) VALUES
+('cm1wmj8vv0007wgrl5ycclgvm', '0', '#1d1b1b', 'ABCD', '1', 'b', 'cm0v2ftr50009124suxegkexs'),
+('cm1wn2cva002awgrlebec9aec', '1', '#5760db', 'LEAD', '1', 'LEAD', 'cm1wn0tb80026wgrl01jsr9z2'),
+('cm1wn2rjb002cwgrlqf7k990r', '2', '#4ef450', 'RENDEZ-VOUS', '1', 'RENDEZ-VOUS', 'cm1wn0tb80026wgrl01jsr9z2'),
+('cm1z437fj00gfwgrli9gvaylf', '1', '#365bc9', 'LEAD', '1', 'LEAD', 'cm1z40h7t00gbwgrlnkm81x0n'),
+('cm1z43xio00ghwgrlec8kn7s1', '2', '#e69447', 'Confirmation', '1', 'Confirmation', 'cm1z40h7t00gbwgrlnkm81x0n'),
+('cm1z44msi00gjwgrlkqjg2qyg', '3', '#24eb27', 'FINALISATION', '1', 'FINALISATION', 'cm1z40h7t00gbwgrlnkm81x0n'),
+('cm1zjaqax000311mb9ak3azba', '3', '#e21818', 'COMPTE RENDU', '1', 'COMPTE RENDU', 'cm1wn0tb80026wgrl01jsr9z2'),
+('cm2njguz5000vd04fjr9wla01', '0', '#888181', 'PROSPECT', '1', 'PROSPECT', 'cm2nit58q0003d04fk3qiklho'),
+('cm2njonqq0013d04fykyuaesb', '2', '#73f28c', 'CONF', '1', 'CONF', 'cm2nit58q0003d04fk3qiklho');
+
+INSERT INTO `CategorieWorkflows` (`id`, `ordre`, `libelle`, `statut`, `idetape`) VALUES
+('cm1wmkwu7000dwgrl3mzsixrx', '1', 'ABCDE', '1', 'cm1wmj8vv0007wgrl5ycclgvm'),
+('cm1wn4ha2002iwgrlh4cxk7zf', '1', 'Non Argumentés', '1', 'cm1wn2cva002awgrlebec9aec'),
+('cm1wn4w1r002kwgrl1p6pkieh', '2', 'Argumentés', '1', 'cm1wn2cva002awgrlebec9aec'),
+('cm1wndnwu002wwgrlt9br011a', '1', 'Suivi des Rendez-vous', '1', 'cm1wn2rjb002cwgrlqf7k990r'),
+('cm1z46nh100glwgrlx9d5witw', '1', 'Non argumentés', '1', 'cm1z437fj00gfwgrli9gvaylf'),
+('cm1z47cne00gnwgrlwcep7ami', '2', 'Argumentés', '1', 'cm1z437fj00gfwgrli9gvaylf'),
+('cm1z487nv00gpwgrl74ru2mic', '1', 'suivi des dossiers', '1', 'cm1z43xio00ghwgrlec8kn7s1'),
+('cm1z495hz00grwgrlnbhzjle0', '2', 'Visite', '1', 'cm1z43xio00ghwgrlec8kn7s1'),
+('cm1z505ed00gtwgrli5ys5228', '1', 'Finalisés', '1', 'cm1z44msi00gjwgrlkqjg2qyg'),
+('cm1zjbb8a000511mblqb026xy', '1', 'Compte Rendu R1', '1', 'cm1zjaqax000311mb9ak3azba'),
+('cm1zjbn6e000711mbyopr4399', '2', 'Compte Rendu R2', '1', 'cm1zjaqax000311mb9ak3azba'),
+('cm2njk29x000xd04fs66uw2cy', '1', 'Non Argumentés', '1', 'cm2njguz5000vd04fjr9wla01'),
+('cm2njkcj5000zd04f0s7ob8k5', '2', 'Argumentés', '1', 'cm2njguz5000vd04fjr9wla01'),
+('cm2njqkxn0015d04f5oe3yf7f', '1', 'Suivi des conf', '1', 'cm2njonqq0013d04fykyuaesb');
+
+
+INSERT INTO `Status` (`id`, `ordre`, `couleur`, `libelle`, `status`, `idcategorie`, `id_etape`, `rdv`) VALUES
+('cm1wmnd3m000jwgrlkfu9lqis', '1', '#c9c5c5', 'Nouveau', 'true', 'cm1wmkwu7000dwgrl3mzsixrx', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm1wnaohr002mwgrlq61nzkhs', '1', '#999999', 'Nouveau', 'true', 'cm1wn4ha2002iwgrlh4cxk7zf', 'cm1wn2cva002awgrlebec9aec' , '0'),
+('cm1wnb4x3002owgrl7omdo6oa', '2', '#ea3434', 'Pas intéressé', 'true', 'cm1wn4ha2002iwgrlh4cxk7zf', 'cm1wn2cva002awgrlebec9aec', '0'),
+('cm1wnc7lu002swgrliitoabux', '1', '#f23636', 'Pas intéressé', 'true', 'cm1wn4w1r002kwgrl1p6pkieh', 'cm1wn2cva002awgrlebec9aec' , '0'),
+('cm1wnd3cw002uwgrledvhvmhu', '2', '#2fbb25', 'Rendez-vous Brut', 'true', 'cm1wn4w1r002kwgrl1p6pkieh', 'cm1wn2rjb002cwgrlqf7k990r', '0'),
+('cm1wne4g6002ywgrl3tib8ifk', '1', '#000000', 'Confirmé', 'true', 'cm1wndnwu002wwgrlt9br011a', 'cm1wn2rjb002cwgrlqf7k990r', '0'),
+('cm1z51hwp00gvwgrlgdfyyg5v', '1', '#dd3636', 'Pas intéressé', 'true', 'cm1z46nh100glwgrlx9d5witw', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z54uxs00gxwgrlovqt414s', '2', '#ffee2e', 'NRP', 'true', 'cm1z46nh100glwgrlx9d5witw', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z57gwf00gzwgrlm51kelxo', '3', '#f81616', 'Ne pas appeler', 'true', 'cm1z46nh100glwgrlx9d5witw', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z583fc00h1wgrl7ab3qop0', '4', '#000000', 'Mauvais numéro', 'true', 'cm1z46nh100glwgrlx9d5witw', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z58j6b00h3wgrl3njsggbf', '5', '#000000', 'Faux lead', 'true', 'cm1z46nh100glwgrlx9d5witw', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z59bex00h5wgrly70ur3rd', '6', '#ffeb0a', 'A rappeler', 'true', 'cm1z46nh100glwgrlx9d5witw', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z5b5ex00h7wgrle54mahen', '1', '#f50f0f', 'Pas intéressé', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z5cddy00h9wgrl9rbktnqb', '2', '#f00000', 'Ne pas appeler', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z5d7ja00hbwgrlqluoq7ic', '3', '#fdf50d', 'À rappeler', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z5dmku00hdwgrlcljwcpvc', '4', '#198de6', 'A confirmer', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z437fj00gfwgrli9gvaylf', '0'),
+('cm1z5fa7z00hfwgrleedyma48', '5', '#4dff00', 'A confirmer', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z43xio00ghwgrlec8kn7s1', '0'),
+('cm1zjchkm000911mbc92gu37y', '1', '#ff0000', 'Pas intéressé', 'true', 'cm1zjbb8a000511mblqb026xy', 'cm1zjaqax000311mb9ak3azba', '0'),
+('cm1zjf3yj000b11mby06patef', '2', '#44ff00', 'Confirmé', 'true', 'cm1wndnwu002wwgrlt9br011a', 'cm1zjaqax000311mb9ak3azba', '0'),
+('cm27pz3co0001qym7zl3fpf4f', '1', '#0a3da4', 'AAA', 'true', 'cm1z495hz00grwgrlnbhzjle0', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm27q0ny80003qym76q3ntsm0', '1', '#000000', 'aaaa', 'true', 'cm1z495hz00grwgrlnbhzjle0', 'cm1wn2cva002awgrlebec9aec', '0'),
+('cm2810wkt009vdwgr51yrf60k', '1', '#db1a1a', 'Pas intéressé', 'true', 'cm1z487nv00gpwgrl74ru2mic', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm2njm48m0011d04fvpkmqig4', '1', '#ec1818', 'Pas intéressé', 'true', 'cm2njk29x000xd04fs66uw2cy', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm2njrgg30017d04femu517ie', '1', '#2448db', 'Pré-visites', 'true', 'cm2njqkxn0015d04f5oe3yf7f', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm2njt0od0019d04fbj7qk4ja', '1', '#0dd31b', 'A confirmé', 'true', 'cm2njkcj5000zd04f0s7ob8k5', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm2njus1j001bd04f868k0g3q', '2', '#00728f', 'A confirmé', 'true', 'cm2njkcj5000zd04f0s7ob8k5', 'cm2njonqq0013d04fykyuaesb', '0'),
+('cm2otsjnu000pv3xowss2q5qi', '3', '#e70d0d', 'erreur', 'true', 'cm1wndnwu002wwgrlt9br011a', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm2ottnjs000rv3xow4j6uqvf', '4', '#ff0000', 'erreurs', 'true', 'cm1wndnwu002wwgrlt9br011a', 'cm1wn2cva002awgrlebec9aec', '0'),
+('cm2oukf7x000vv3xorwyun1ei', '3', '#37ff00', 'a confirmer', 'true', 'cm1wn4w1r002kwgrl1p6pkieh', 'cm1wn2rjb002cwgrlqf7k990r', '0'),
+('cm3ca4zln002711o9koxbosyr', '7', '#00ff04', 'test conf', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z43xio00ghwgrlec8kn7s1', '0'),
+('cm3cyxcw0003l11o9t92ys4sb', '3', '#e8d611', 'NRP', 'true', 'cm1wn4ha2002iwgrlh4cxk7zf', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm3czgzn7003t11o9iuqufoef', '8', '#002080', 'confirmation', 'true', 'cm1z47cne00gnwgrlwcep7ami', 'cm1z43xio00ghwgrlec8kn7s1', '0'),
+('cm3iw8sk1003fgdothlvf0itn', '3', '#37ff00', 'complet', 'true', 'cm1z505ed00gtwgrli5ys5228', 'cm1wmj8vv0007wgrl5ycclgvm', '0'),
+('cm3iwaiki003hgdot4ke7euuf', '3', '#000000', 'complet', 'true', 'cm1z495hz00grwgrlnbhzjle0', 'cm1z44msi00gjwgrlkqjg2qyg', '0');
+
+INSERT INTO `ModulePerso` (`id`, `libelle`, `statut`) VALUES
+('clyrc8vjr0000u7878ky7j2zm', 'RAPPORT_MODULE', '1'),
+('cm14xfcup00083njpllcc7ztp', 'AGENDA', '1'),
+('cm14xk42g000b3njpe89omla0', 'AFFICHER_DOSSIER', '1'),
+('cm14xnhes000c3njpv2719ts5', 'AFFICHER_PROSPECTS', '1'),
+('cm14xpyr7000d3njpwzgjrghy', 'AFFICHER_CDRS', '1'),
+('cm14xrj0h000e3njp40fjdfrq', 'AFFICHER_APPEL_AUTOMATIQUE', '1'),
+('cm14xt7mu000f3njpz2fus7gq', 'AFFICHER_CAMPAGNE', '1'),
+('cm14y1lsg000q3njphm2z27nf', 'AFFICHER_PRODUIT_CAPAGNE', '1'),
+('cm14y5w95000t3njpgjq3x5ii', 'CREER_CAMPAGNE', '1'),
+('cm14y5w95000t3njpgjq3x5is', 'AJOUTER_LEAD_CAMPAGNE', '1'),
+('cm14y9c4c000w3njpga8z9yr6', 'MAPPING_CAMPAGNE', '1'),
+('cm14ye08c000z3njp9301vd4x', 'RESULTAT_SCANNER', '1'),
+('cm14yilki00123njpcry5f21k', 'REPPARTITION_LEAD_PAR_UTILISATEUR', '1'),
+('cm14yilki00123njpcry5f21s', 'CREER_PROGRAMME', '1'),
+('cm1pg2wah000012mlljrgf503', 'CREER_PROSPECT', '1'),
+('cm1pg3od1000112ml7sk20sjh', 'EXPORTER_PROSPECT', '1'),
+('cm1pg58a8000212ml75e2k42x', 'FILTRE_PROSPECT', '1'),
+('cm1pg5uye000312mlmgiaxdwm', 'CREER_DOSSIER', '1'),
+('cm1pg6bqg000412ml6z3hlps0', 'EXPORTER_DOSSIER', '1'),
+('cm1pg6w8u000512mlvqi9hstv', 'FILTRE_DOSSIER', '1');
+
+INSERT INTO `Modules` (`id`, `id_module`, `id_fonction`) VALUES
+('cm16ycek300039u86wknaiy02', 'cm14yilki00123njpcry5f21k', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16ycqed00059u86su83ff0j', 'cm14ye08c000z3njp9301vd4x', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16ycyeo00079u868l3j96kw', 'cm14y9c4c000w3njpga8z9yr6', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yd7t100099u86dcnr9ax1', 'cm14y5w95000t3njpgjq3x5ii', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16ydgnt000b9u86kdk7wb8i', 'cm14y1lsg000q3njphm2z27nf', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yeepj000d9u86j1ott0gw', 'cm14xrj0h000e3njp40fjdfrq', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yeol7000f9u86vp0t7pkn', 'cm14xpyr7000d3njpwzgjrghy', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yf1oi000h9u86sxzanfil', 'cm14xnhes000c3njpv2719ts5', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yfalg000j9u8626vg35hh', 'cm14xk42g000b3njpe89omla0', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yfl54000l9u86bik1tyvi', 'cm14xfcup00083njpllcc7ztp', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16yftox000n9u865lkiipqi', 'clyrc8vjr0000u7878ky7j2zm', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm16ykcw9000p9u86bfdhwsh6', 'cm14xt7mu000f3njpz2fus7gq', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm37iwdcu000bkg698q06hyqa', 'cm14xt7mu000f3njpz2fus7gq', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3c9pp3g001t11o9tirgwk91', 'cm14xnhes000c3njpv2719ts5', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3c9shsu001x11o9eimpk09a', 'cm14y9c4c000w3njpga8z9yr6', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3c9vjto001z11o95eu01bo1', 'clyrc8vjr0000u7878ky7j2zm', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3c9z0xc002111o981hxt700', 'cm14xrj0h000e3njp40fjdfrq', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3ca7tz8002v11o9v084186l', 'cm14yilki00123njpcry5f21s', 'clycuhh4e0000bevxv9wxz4ds'),
+('cm3cza6f7003p11o9yoeojda9', 'cm14xk42g000b3njpe89omla0', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3df1as10005gdotfm2y88uj', 'cm14xk42g000b3njpe89omla0', 'cm37fhz2w001pb4gh5lqdaqwe'),
+('cm3dg51ei0007gdot56n0onyv', 'cm14xnhes000c3njpv2719ts5', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3dg5ogu000bgdot37kzvvtc', 'cm14xrj0h000e3njp40fjdfrq', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3hmp4v0002agdotxj66h24k', 'cm1pg6w8u000512mlvqi9hstv', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3iv93a9002lgdotqqfdo4gb', 'cm1pg6w8u000512mlvqi9hstv', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3iv9muk002ngdot6f2zbxct', 'cm1pg5uye000312mlmgiaxdwm', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3iv9y68002pgdotesk06z06', 'cm1pg6bqg000412ml6z3hlps0', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivcn5g002rgdot7vqwsxj6', 'cm14xrj0h000e3njp40fjdfrq', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivdd68002tgdotz9gqhzcd', 'cm14xpyr7000d3njpwzgjrghy', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivdwpe002vgdotual6zi67', 'cm14xk42g000b3njpe89omla0', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivebdz002xgdothywoldyd', 'cm14xfcup00083njpllcc7ztp', 'cm3iuw59p002bgdot12krsgh1'),
+('cm3ivkoc30039gdotsknxym3v', 'cm14xt7mu000f3njpz2fus7gq', 'cm37fihvx001qb4ghp8vwbogq'),
+('cm3ivyn7h003bgdotvwe48yrt', 'cm14xt7mu000f3njpz2fus7gq', 'cm3iuw59p002bgdot12krsgh1');

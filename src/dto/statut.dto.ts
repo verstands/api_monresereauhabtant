@@ -25,4 +25,9 @@ export class StatusDto {
     message: 'Le champ etape workflow est obligatoire',
   })
   id_etape: string;
+
+  @IsNotEmpty({
+    message: 'Le champ rdv  est obligatoire',
+  })
+  rdv: string;
 }

@@ -314,6 +314,7 @@ model Pospects {
   id_produit       String
   typelead         String
   id_confirmateur  String
+  rdv              String
 
   pospect     Agendas[]
   commenatire Commentaires[]
@@ -433,6 +434,8 @@ model Status {
   status      String
   idcategorie String
   id_etape    String
+  rdv         String
+
 
   catworkflow CategorieWorkflows? @relation(fields: [idcategorie], references: [id])
   etape       EtapeWorkflows?     @relation(fields: [id_etape], references: [id])
