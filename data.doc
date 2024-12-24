@@ -187,3 +187,7 @@ INSERT INTO `Modules` (`id`, `id_module`, `id_fonction`) VALUES
 ('cm3ivebdz002xgdothywoldyd', 'cm14xfcup00083njpllcc7ztp', 'cm3iuw59p002bgdot12krsgh1'),
 ('cm3ivkoc30039gdotsknxym3v', 'cm14xt7mu000f3njpz2fus7gq', 'cm37fihvx001qb4ghp8vwbogq'),
 ('cm3ivyn7h003bgdotvwe48yrt', 'cm14xt7mu000f3njpz2fus7gq', 'cm3iuw59p002bgdot12krsgh1');
+
+INSERT INTO `TypeProduits` (`id`, `image`, `titre`, `description`, `id_work`) VALUES
+('clyposooy00004q2ei2pbpv56', 'image', 'Rénovation Globale', 'Poursuivez votre parcours avec une interface personnalisée pour la rénovation global', 'cm0v2ftr50009124suxegkexs'),
+('cm3ca8ry6002x11o9k3lxc9as', 'Image', 'Renovation d\'ampleur', 'Renovation d\'ampleur', 'cm1z40h7t00gbwgrlnkm81x0n');
