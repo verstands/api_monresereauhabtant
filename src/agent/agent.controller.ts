@@ -12,6 +12,7 @@ import {
 import { AgentService } from './agent.service';
 import { AgentInterface } from 'src/dto/agent.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AgentInterfaces } from 'src/interface/AgentInterface';
 
 @UseGuards(JwtAuthGuard)
 @Controller('agent')
@@ -31,7 +32,7 @@ export class AgentController {
   }
 
   @Put(':id')
-  updateAgent(@Param('id') id: string, @Body() agentUpdate: AgentInterface) {
+  updateAgent(@Param('id') id: string, @Body() agentUpdate: AgentInterfaces) {
     return this.agentService.updateAgent({ id, ...agentUpdate });
   }
 

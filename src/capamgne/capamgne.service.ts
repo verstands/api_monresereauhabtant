@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { group } from 'console';
 import { CapamgneDto } from 'src/dto/campagne.dt';
 import { PrismaService } from 'src/prisma.service';
 
@@ -13,7 +14,16 @@ export class CapamgneService {
         id: 'desc',
       },
       include: {
-        produit: true,
+        produit: {
+          include: {
+            work: {
+              select: {
+                id: true,
+                libelle : true
+              },
+            },
+          },
+        },
         pospects: true, 
       },
     });
@@ -46,9 +56,12 @@ export class CapamgneService {
     const campagnes = await this.prismaservice.capamgnes.findMany({
       where: {
           pospects: {
-              some: { 
-                  id_user: id
-              }
+            some: {
+              OR: [
+                { id_user: id },
+                { id_confirmateur: id }
+              ]
+            }
           }
       },
       orderBy: {
@@ -94,10 +107,28 @@ export class CapamgneService {
       },
 
       include : {
-         produit : true
+         produit : {
+          include: {
+            work: {
+              select: {
+                id: true,
+                libelle : true
+              },
+            },
+          },
+         },
+         groupe : true
       }
     });
-    return { data: campagne };
+    const campagneuser = await this.prismaservice.groupeUser.findMany({
+      where : {
+        id_groupe : campagne.idgroupe,
+      },
+      include : {
+        agentgroupe : true,
+      }
+    })
+    return { data: campagne, datauser : campagneuser };
   }
 
   async updateCampagne({ id, ...data }: { id: string } & CapamgneDto) {

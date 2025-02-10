@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ModeleMailDto } from 'src/dto/mailmodele.dto';
+import { ModelMailInterface } from 'src/interface/ModelMailInterface';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -49,7 +50,7 @@ export class ModelmailService {
     return { data: data };
   }
 
-  async update({ id, ...data }: { id: string } & ModeleMailDto) {
+  async update({ id, ...data }: { id: string } & ModelMailInterface) {
     const update = await this.prismaservice.modelmail.update({
       where: {
         id,

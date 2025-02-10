@@ -20,12 +20,10 @@ export class StatusDto {
     message: 'Le champ categorie est obligatoire',
   })
   idcategorie: string;
-
   @IsNotEmpty({
     message: 'Le champ etape workflow est obligatoire',
   })
   id_etape: string;
-
   @IsNotEmpty({
     message: 'Le champ rdv  est obligatoire',
   })

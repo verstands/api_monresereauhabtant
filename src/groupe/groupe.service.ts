@@ -37,14 +37,31 @@ export class GroupeService {
       return update;
     }
   
+   
     async delete({ id }: { id: string }) {
-      await this.prismaservice.groupes.delete({
-        where: {
-          id,
-        },
-      });
-      return { message: 'groupe supprimé avec success ' };
+      try {
+        // Supprimer d'abord les enregistrements liés dans la table GroupeUser
+        await this.prismaservice.groupeUser.deleteMany({
+          where: { id_groupe: id },
+        });
+    
+        // Ensuite, supprimer le groupe
+        const deletedGroup = await this.prismaservice.groupes.delete({
+          where: { id },
+        });
+    
+        if (deletedGroup) {
+          console.log(`Groupe supprimé avec succès: ${id}`);
+        } else {
+          console.log(`Aucun groupe trouvé avec l'ID: ${id}`);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la suppression du groupe:', error);
+        throw new Error('Erreur lors de la suppression du groupe');
+      }
     }
+    
+    
 
     async create(applicationdto: GroupeDto) {
         const createAgent = await this.prismaservice.groupes.create({

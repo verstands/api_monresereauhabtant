@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { StatusDto } from 'src/dto/statut.dto';
+import { StatusWorkflowInterface } from 'src/interface/StatusIterface';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -29,7 +30,7 @@ export class StatusService {
     return { data: data };
   }
 
-  async updateSatus({ id, ...data }: { id: string } & StatusDto) {
+  async updateSatus({ id, ...data }: { id: string } & StatusWorkflowInterface) {
     const update = await this.prismaservice.status.update({
       where: {
         id,
@@ -54,7 +55,7 @@ export class StatusService {
     const createAgent = await this.prismaservice.status.create({
       data: dataS
     });
-    return createAgent;
+    return createAgent; 
   }
 
   async viewstattuCampagne(id_campagne: string) {

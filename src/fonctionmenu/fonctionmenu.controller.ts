@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/c
 import { FonctionmenuService } from './fonctionmenu.service';
 import { FonctionMenuDto } from 'src/dto/FonctionMenu.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { EtapeWorkFlowInterface } from 'src/interface/EtapeWorkFlowINterface';
+import { FonctionMenuInterface } from 'src/interface/FonctionMenuInterface';
 
 @UseGuards(JwtAuthGuard)
 @Controller('fonctionmenu')
@@ -34,7 +36,7 @@ export class FonctionmenuController {
     }
   
     @Post()
-    async createAgenda(@Body() agendadto: FonctionMenuDto) {
+    async createAgenda(@Body() agendadto: FonctionMenuInterface) {
       return await this.roleservice.create(agendadto);
     }
 }

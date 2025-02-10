@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { GroupeService } from './groupe.service';
 import { GroupeDto } from 'src/dto/grouoe.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('groupe')
 export class GroupeController {
@@ -17,6 +18,12 @@ export class GroupeController {
       return this.roleservice.getId({
         id,
       });
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Put(':id')
+    update(@Param('id') id: string, @Body() agentUpdate: GroupeDto) {
+      return this.roleservice.update({ id, ...agentUpdate });
     }
    
   

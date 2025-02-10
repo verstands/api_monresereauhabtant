@@ -10,8 +10,8 @@ export class DossierController {
     constructor(private readonly roleservice : DossierService) {}
 
     @Get()
-    get() {
-      return this.roleservice.get();
+    async get(@Query() paginationdto: PaginationDto) {
+      return this.roleservice.get(paginationdto);
     }
 
     @Get('/one')
@@ -40,4 +40,33 @@ export class DossierController {
     delete(@Param('id') id: string) {
       return this.roleservice.delete({ id });
     }
+
+    @Get('one/one/:id')
+    getIdOneId(@Param('id') id: string) {
+      return this.roleservice.getIdOneProspects(id);
+    }
+
+    @Get('oneCampagne/oneCampagne/:id')
+    getIdOneCampagne(@Param('id') id: string) {
+      return this.roleservice.getIdOneProspectCampagne({
+        id,
+      });
+    }
+
+    @Get('oneCampagne/oneCampagne/:id/:id_user')
+    getIdOneCampagneID(
+      @Param('id') id: string,
+      @Param('id_user') id_user: string
+    ) {
+      return this.roleservice.getIdOneProspectCampagneId({
+        id,
+        id_user,
+      });
+    }
+
+    @Put('nrp/:id/:idstatut')
+  updatenrp(@Param('id') id: string, @Param('idstatut') idstatut: string) {
+    return this.roleservice.updateNRP({ id, idstatut });
+  }
+
 }

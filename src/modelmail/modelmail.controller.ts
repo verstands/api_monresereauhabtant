@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { ModelmailService } from './modelmail.service';
 import { ModeleMailDto } from 'src/dto/mailmodele.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ModelMailInterface } from 'src/interface/ModelMailInterface';
 
 @UseGuards(JwtAuthGuard)
 @Controller('modelmail')
@@ -28,7 +29,7 @@ export class ModelmailController {
       return this.roleservice.getMail(id_campagne, id_fonction);
     }
     @Put(':id')
-    update(@Param('id') id: string, @Body() agentUpdate: ModeleMailDto) {
+    update(@Param('id') id: string, @Body() agentUpdate: ModelMailInterface) {
       return this.roleservice.update({ id, ...agentUpdate });
     }
 

@@ -10,6 +10,9 @@ export class TypeproduitService {
       const data = await this.prismaservice.typeProduits.findMany({
         orderBy: {
           id : 'desc'
+        },
+        include: {
+          work: true,
         }
       });
       return { data: data };

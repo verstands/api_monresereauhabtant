@@ -21,12 +21,12 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class PiecejointController {
   constructor(private readonly roleservice: PiecejointService) {}
 
-  @Get()
-  get() {
-    return this.roleservice.get();
+  @Get(':id')
+  get(@Param('id') id: string) {
+    return this.roleservice.get({ id });
   }
 
-  @Get(':id')
+  @Get('findinone/:id')
   getApplication(@Param('id') id: string) {
     return this.roleservice.getId({ id });
   }

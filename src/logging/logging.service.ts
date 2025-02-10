@@ -8,6 +8,9 @@ export class LoggingService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(log: LogEntry) {
+    if (log.endpoint === "/api/auth/login") {
+      return;
+    }
     await this.prismaService.logdata.create({
       data: {
         action: log.action,

@@ -19,12 +19,13 @@ async function bootstrap() {
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
+  app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
 
-  const loggingService = app.get(LoggingService);
+ const loggingService = app.get(LoggingService);
   app.useGlobalInterceptors(new LoggingInterceptor(loggingService));
 
   const port = 4000;
-  await app.listen(port); 
+  await app.listen(port);
 }
 bootstrap();
 

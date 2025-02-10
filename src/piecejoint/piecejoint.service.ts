@@ -7,8 +7,11 @@ import * as moment from 'moment';
 export class PiecejointService {
   constructor(private readonly prismaservice: PrismaService) {}
 
-  async get() {
+  async get({ id }: { id: string }) {
     const data = await this.prismaservice.pieceJoits.findMany({
+      where: {
+        id_prospect : id,
+      },
       orderBy: {
         id: 'desc',
       },

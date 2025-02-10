@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CategorieworkflowService } from './categorieworkflow.service';
 import { CategorieWorkFlowDto } from 'src/dto/categorieworkflow';
+import { CategorieWorkflowInterface } from 'src/interface/CAtegorieWorkflow';
 
 @Controller('categorieworkflow')
 export class CategorieworkflowController {
@@ -29,6 +30,11 @@ export class CategorieworkflowController {
         id,
       });
     }
+
+     @Put(':id')
+      updateagenda(@Param('id') id: string, @Body() agentUpdate: CategorieWorkflowInterface) {
+        return this.roleservice.update({ id, ...agentUpdate });
+      }
    
   
     @Delete(':id')

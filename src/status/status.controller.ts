@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { StatusService } from './status.service';
 import { StatusDto } from 'src/dto/statut.dto';
+import { StatusWorkflowInterface } from 'src/interface/StatusIterface';
 
 @UseGuards(JwtAuthGuard)
 
@@ -33,7 +34,7 @@ export class StatusController {
     }
 
   @Put(':id')
-  updateagenda(@Param('id') id: string, @Body() agentUpdate: StatusDto) {
+  updateagenda(@Param('id') id: string, @Body() agentUpdate: StatusWorkflowInterface) {
     return this.statusservice.updateSatus({ id, ...agentUpdate });
   }
 

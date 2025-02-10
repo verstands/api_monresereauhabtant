@@ -55,6 +55,9 @@ export class PospectDto {
   @IsOptional()
   statuslead: string
 
+  @IsOptional()
+  rdv: string
+
   @IsEmail(
     {},
     {

@@ -22,7 +22,7 @@ export class PospectService {
         produitpospect: true,
         statutp: true,
       },
-      skip: Number(paginationdto.skip), 
+      skip: Number(paginationdto.skip),
       take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,
     });
     return { data: data };
@@ -30,6 +30,9 @@ export class PospectService {
 
   async getSuiviLead() {
     const data = await this.prismaservice.pospects.findMany({
+      where : {
+        statuslead: "1", 
+      },
       orderBy: {
         "id": "desc"
       },
@@ -41,7 +44,26 @@ export class PospectService {
 
       }
     });
-    console.log('dataaaaaaaaaaaaa',)
+    return { data: data };
+  }
+
+  async getSuiviLeadDossier() {
+    const data = await this.prismaservice.pospects.findMany({
+      where : {
+        statuslead: "1",
+        statusdossier: "1" 
+      },
+      orderBy: {
+        "id": "desc"
+      },
+      include: {
+        agentpospect: true,
+        capagnepospect: true,
+        produitpospect: true,
+        statutp: true,
+
+      }
+    });
     return { data: data };
   }
 
@@ -68,8 +90,29 @@ export class PospectService {
     const data = await this.prismaservice.pospects.findMany({
       where: {
         id_user: id,
+        statuslead: "1",
+        statusdossier: "1" 
+      },
+      orderBy: {
+        "id": "desc"
+      },
+      include: {
+        agentpospect: true,
+        capagnepospect: true,
+        produitpospect: true,
+        statutp: true,
+
+      }
+    });
+    return { data: data };
+  }
+
+  async getSuiviLeadDossierAgent({ id }: { id: string }) {
+    const data = await this.prismaservice.pospects.findMany({
+      where: {
+        id_user: id,
         statuslead: {
-           not : "0"
+          not: "0"
         },
       },
       orderBy: {
@@ -98,9 +141,9 @@ export class PospectService {
       where: {
         OR: [
           { id_user: id },
-          { 
-            id_confirmateur: id, 
-            statuslead : "1" 
+          {
+            id_confirmateur: id,
+            statuslead: "1"
           }
         ]
       }
@@ -118,7 +161,7 @@ export class PospectService {
       },
     });
 
-    return { nouveau: data, nrp: dataNRP, leadagent: leadagent,  };
+    return { nouveau: data, nrp: dataNRP, leadagent: leadagent, };
   }
 
   async getIdOneProspect() {
@@ -371,5 +414,117 @@ export class PospectService {
 
     return { data: statusCounts };
   }
+
+  async FiltrageProspect(filters: Partial<{
+    id_user: string;
+    id_produit: string;
+    id_campagne: string;
+    status: string;
+  }>) {
+    // Construction de la clause WHERE en filtrant les clés avec des valeurs valides
+    const whereClause = Object.fromEntries(
+      Object.entries(filters).filter(
+        ([_, value]) => value && value !== 'null' && value.trim() !== ''
+      )
+    );
+  
+    // Vérification si aucune condition de filtrage n'est donnée
+    if (Object.keys(whereClause).length === 0) {
+      return { message: 'Aucun critère de filtrage fourni.' };
+    }
+  
+    // Utilisation de la méthode findMany avec include pour récupérer les relations associées
+    const prospects = await this.prismaservice.pospects.findMany({
+      where: whereClause,
+      include: {
+        agentpospect: true,
+        capagnepospect: true,
+        produitpospect: true,
+        statutp: true,
+      },
+    });
+  
+    return { data: prospects };
+  }
+
+
+  async FiltrageProspectDossierSuivi(filters: Partial<{
+    id_user: string;
+    id_produit: string;
+    id_campagne: string;
+    status: string;
+  }>) {
+    // Construction de la clause WHERE en filtrant les clés avec des valeurs valides
+    const whereClause = Object.fromEntries(
+      Object.entries(filters).filter(
+        ([_, value]) => value && value !== 'null' && value.trim() !== ''
+      )
+    );
+  
+    // Vérification si aucune condition de filtrage n'est donnée
+    if (Object.keys(whereClause).length === 0) {
+      return { message: 'Aucun critère de filtrage fourni.' };
+    }
+  
+    // Utilisation de la méthode findMany avec include pour récupérer les relations associées
+    const prospects = await this.prismaservice.pospects.findMany({
+      where: {
+        ...whereClause,
+        statusdossier : "1",
+        statuslead: "1"
+      },
+
+      include: {
+        agentpospect: true,
+        capagnepospect: true,
+        produitpospect: true,
+        statutp: true,
+      },
+    });
+  
+    return { data: prospects };
+  }
+
+  async FiltrageProspectLeadSuivi(filters: Partial<{
+    id_user: string;
+    id_produit: string;
+    id_campagne: string;
+    status: string;
+  }>) {
+    // Construction de la clause WHERE en filtrant les clés avec des valeurs valides
+    const whereClause = Object.fromEntries(
+      Object.entries(filters).filter(
+        ([_, value]) => value && value !== 'null' && value.trim() !== ''
+      )
+    );
+  
+    // Vérification si aucune condition de filtrage n'est donnée
+    if (Object.keys(whereClause).length === 0) {
+      return { message: 'Aucun critère de filtrage fourni.' };
+    }
+  
+    // Utilisation de la méthode findMany avec include pour récupérer les relations associées
+    const prospects = await this.prismaservice.pospects.findMany({
+      where: {
+        ...whereClause,
+        statusdossier : "0",
+        statuslead: "1"
+      },
+
+      include: {
+        agentpospect: true,
+        capagnepospect: true,
+        produitpospect: true,
+        statutp: true,
+      },
+    });
+  
+    return { data: prospects };
+  }
+  
+
+
+
+
 
 }

@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { WorkflowService } from './workflow.service';
 import { WorkFlowDto } from 'src/dto/workflow.dto';
+import { WorkflowInterface } from 'src/interface/WorkflowIterface';
 
 @Controller('workflow')
 export class WorkflowController {
@@ -24,7 +25,7 @@ export class WorkflowController {
   }
 
   @Put(':id')
-  updateagenda(@Param('id') id: string, @Body() agentUpdate: WorkFlowDto) {
+  updateagenda(@Param('id') id: string, @Body() agentUpdate: WorkflowInterface) {
     return this.workflow.update({ id, ...agentUpdate });
   }
 

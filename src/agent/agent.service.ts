@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { AgentInterface } from 'src/dto/agent.dto';
+import { AgentInterfaces } from 'src/interface/AgentInterface';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -35,7 +36,7 @@ export class AgentService {
     return { data: agent };
   }
 
-  async updateAgent({ id, ...agentUpdate }: { id: string } & AgentInterface) {
+  async updateAgent({ id, ...agentUpdate }: { id: string } & AgentInterfaces) {
     const updatedAgent = await this.prismaservice.agents.update({
       where: {
         id,

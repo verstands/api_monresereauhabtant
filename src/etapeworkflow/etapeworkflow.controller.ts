@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { EtapeworkflowService } from './etapeworkflow.service';
 import { EtapeWorkFlowDto } from 'src/dto/etapeworkflowdto';
+import { EtapeWorkFlowInterface } from 'src/interface/EtapeWorkFlowINterface';
 
 @Controller('etapeworkflow')
 export class EtapeworkflowController {
@@ -9,6 +10,11 @@ export class EtapeworkflowController {
     @Get()
     get() {
       return this.roleservice.get();
+    }
+
+    @Get('/etapeworkflow/etapeworkflow')
+    gets() {
+      return this.roleservice.gets();
     }
 
   
@@ -46,4 +52,9 @@ export class EtapeworkflowController {
     async createAgenda(@Body() agendadto: EtapeWorkFlowDto) {
       return await this.roleservice.create(agendadto); 
     }
+
+     @Put(':id')
+      updateagenda(@Param('id') id: string, @Body() agentUpdate: EtapeWorkFlowInterface) {
+        return this.roleservice.update({ id, ...agentUpdate });
+      }
 }

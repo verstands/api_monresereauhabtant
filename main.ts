@@ -22,6 +22,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor(loggingService));
 
   const port = 4000;
-  await app.listen(port);
+  await app.listen(port); 
 }
 bootstrap(); 

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CategorieWorkFlowDto } from 'src/dto/categorieworkflow';
+import { CategorieWorkflowInterface } from 'src/interface/CAtegorieWorkflow';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -46,7 +47,7 @@ export class CategorieworkflowService {
     return { data: data };
   }
 
-  async update({ id, ...data }: { id: string } & CategorieWorkFlowDto) {
+  async update({ id, ...data }: { id: string } & CategorieWorkflowInterface) {
     const update = await this.prismaservice.categorieWorkflows.update({
       where: {
         id,

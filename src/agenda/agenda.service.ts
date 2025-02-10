@@ -63,6 +63,17 @@ export class AgendaService {
     const createAgent = await this.prismaservice.agendas.create({
       data: agendadto
     });
+
+    await this.prismaservice.pospects.update({
+      where: {
+        id : agendadto.id_postect,
+      },
+      data: {
+        //status: idstatut,
+        statuslead: '1',
+      },
+    });
+    
     return createAgent;
   }
 

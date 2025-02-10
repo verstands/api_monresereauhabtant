@@ -8,19 +8,23 @@ import { DEFAULT_PAGE_SIZE } from 'utils/constants';
 export class DossierService {
     constructor(private readonly prismaservice: PrismaService) {}
 
-    async get() {
+    async get(paginationdto: PaginationDto) {
       const data = await this.prismaservice.pospects.findMany({
-        orderBy:{
-            "id" : "desc"
-        },
         where: {
-            status : "1"
+          statuslead: "1",
+          statusdossier: "0"
         },
-        include:{
-            agentpospect : true,
-            capagnepospect : true,
-            produitpospect : true
-        }
+        orderBy: {
+          "id": "desc"
+        },
+        include: {
+          agentpospect: true,
+          capagnepospect: true,
+          produitpospect: true,
+          statutp: true,
+        },
+        skip: Number(paginationdto.skip),
+        take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,
       });
       return { data: data };
     }
@@ -110,6 +114,93 @@ export class DossierService {
         skip: Number(paginationdto.skip), 
         take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,
       });
+    }
+
+
+    async getIdOneProspects(id: string) {
+      const data = await this.prismaservice.pospects.findFirst({
+        where: {
+          statuslead: '1',
+          statusdossier: '0',
+          id_user: id
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        include: {
+          agentpospect: true,
+          capagnepospect: true,
+          produitpospect: {
+            include: {
+              work: true,
+            }
+          }
+        },
+      });
+  
+      return { data };
+    }
+  
+    async getIdOneProspectCampagne({ id }: { id: string }) {
+      const data = await this.prismaservice.pospects.findFirst({
+        where: {
+          id_campagne: id,
+          statuslead: '1',
+          statusdossier: '0',
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        include: {
+          agentpospect: true,
+          capagnepospect: true,
+          produitpospect: {
+            include: {
+              work: true,
+            }
+          }
+        },
+      });
+  
+      return { data: data };
+    }
+  
+    async getIdOneProspectCampagneId({ id, id_user }: { id: string, id_user: string }) {
+      const data = await this.prismaservice.pospects.findFirst({
+        where: {
+          id_campagne: id,
+          id_user: id_user,
+          statuslead: '1',
+          statusdossier: '0',
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        include: {
+          agentpospect: true,
+          capagnepospect: true,
+          produitpospect: {
+            include: {
+              work: true,
+            }
+          }
+        },
+      });
+  
+      return { data: data };
+    }
+
+    async updateNRP({ id, idstatut }: { id: string, idstatut: string }) {
+      const update = await this.prismaservice.pospects.update({
+        where: {
+          id,
+        },
+        data: {
+          status: idstatut,
+          statusdossier: '1',
+        },
+      });
+      return { message: 'prospect Ne repond pas', data: update };
     }
     
 }

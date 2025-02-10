@@ -17,7 +17,7 @@ import { PaginationDto } from 'src/dto/paginationPage.dto';
 @UseGuards(JwtAuthGuard)
 @Controller('pospect')
 export class PospectController {
-  constructor(private readonly roleservice: PospectService) {}
+  constructor(private readonly roleservice: PospectService) { }
 
   @Get()
   async getPospects(@Query() paginationdto: PaginationDto) {
@@ -61,7 +61,7 @@ export class PospectController {
 
   @Get('countNouveau/countNouveau/:id')
   getcountNouveau(@Param('id') id: string) {
-    return this.roleservice.getcountNouveau({id});
+    return this.roleservice.getcountNouveau({ id });
   }
 
   @Get(':id')
@@ -75,7 +75,7 @@ export class PospectController {
   updatenrp(@Param('id') id: string, @Param('idstatut') idstatut: string) {
     return this.roleservice.updateNRP({ id, idstatut });
   }
-  
+
 
   @Put('rdv/:id')
   updaterdv(@Param('id') id: string) {
@@ -132,8 +132,89 @@ export class PospectController {
     return this.roleservice.getSuiviLeadAgent({ id });
   }
 
-  @Get('suivileads')
+  @Get('suivileadagentdossier/:id')
+  getSuivileadAgentDossier(@Param('id') id: string) {
+    return this.roleservice.getSuiviLeadDossierAgent({ id });
+  }
+
+  @Get('suivileads/suivileads')
   async getSuiviLead() {
     return this.roleservice.getSuiviLead();
   }
+
+  @Get('suivileads/suivileadsdossier')
+  async getSuiviLeadD() {
+    return this.roleservice.getSuiviLeadDossier();
+  }
+
+  @Get('filtrage/filtrage')
+  async getfiltrage(
+    @Query('id_user') id_user?: string,
+    @Query('id_produit') id_produit?: string,
+    @Query('id_campagne') id_campagne?: string,
+    @Query('status') status?: string
+  ) {
+    const filters = {
+      id_user: id_user && id_user !== 'null' ? id_user : undefined,
+      id_produit: id_produit && id_produit !== 'null' ? id_produit : undefined,
+      id_campagne: id_campagne && id_campagne !== 'null' ? id_campagne : undefined,
+      status: status && status !== 'null' ? status : undefined,
+    };
+
+    // Vérification pour s'assurer qu'il y a bien des filtres valides
+    const validFilters = Object.entries(filters).filter(([_, value]) => value !== undefined);
+    if (validFilters.length === 0) {
+      return { message: 'Aucun critère de filtrage fourni.' };
+    }
+
+    return this.roleservice.FiltrageProspect(filters);
+  }
+
+
+  @Get('filtrage/filtragedossiersuivi')
+  async getfiltrageDossierSuivi(
+    @Query('id_user') id_user?: string,
+    @Query('id_produit') id_produit?: string,
+    @Query('id_campagne') id_campagne?: string,
+    @Query('status') status?: string
+  ) {
+    const filters = {
+      id_user: id_user && id_user !== 'null' ? id_user : undefined,
+      id_produit: id_produit && id_produit !== 'null' ? id_produit : undefined,
+      id_campagne: id_campagne && id_campagne !== 'null' ? id_campagne : undefined,
+      status: status && status !== 'null' ? status : undefined,
+    };
+
+    // Vérification pour s'assurer qu'il y a bien des filtres valides
+    const validFilters = Object.entries(filters).filter(([_, value]) => value !== undefined);
+    if (validFilters.length === 0) {
+      return { message: 'Aucun critère de filtrage fourni.' };
+    }
+
+    return this.roleservice.FiltrageProspectDossierSuivi(filters);
+  }
+
+  @Get('filtrage/filtrageLeadsuivi')
+  async getfiltrageLeadSuivi(
+    @Query('id_user') id_user?: string,
+    @Query('id_produit') id_produit?: string,
+    @Query('id_campagne') id_campagne?: string,
+    @Query('status') status?: string
+  ) {
+    const filters = {
+      id_user: id_user && id_user !== 'null' ? id_user : undefined,
+      id_produit: id_produit && id_produit !== 'null' ? id_produit : undefined,
+      id_campagne: id_campagne && id_campagne !== 'null' ? id_campagne : undefined,
+      status: status && status !== 'null' ? status : undefined,
+    };
+
+    // Vérification pour s'assurer qu'il y a bien des filtres valides
+    const validFilters = Object.entries(filters).filter(([_, value]) => value !== undefined);
+    if (validFilters.length === 0) {
+      return { message: 'Aucun critère de filtrage fourni.' };
+    }
+
+    return this.roleservice.FiltrageProspectLeadSuivi(filters);
+  }
+
 }

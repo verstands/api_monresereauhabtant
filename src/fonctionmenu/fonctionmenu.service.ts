@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FonctionMenuDto } from 'src/dto/FonctionMenu.dto';
+import { FonctionMenuInterface } from 'src/interface/FonctionMenuInterface';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -66,10 +67,10 @@ export class FonctionmenuService {
     return { message: 'fonction supprimé avec success ' };
   }
 
-  async create(applicationdto: FonctionMenuDto) {
+  async create(applicationdto: FonctionMenuInterface) {
     const createAgent = await this.prismaservice.fonctionMenu.create({
       data: applicationdto,
     });
     return createAgent;
-  }
+  } 
 }
