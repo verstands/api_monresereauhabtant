@@ -30,6 +30,11 @@ export class DossierController {
     async getProspectsByRole(@Param('id_role') id_role: string,@Param('iduser') iduser: string, @Query() paginationdto: PaginationDto) {
       return this.roleservice.findProspectsByRole(id_role, paginationdto, iduser);
     }
+
+    @Get('by-role/admin')
+    async getProspectsByRoleAdmi (@Query() paginationdto: PaginationDto) {
+      return this.roleservice.findProspectsByRoleAdmin(paginationdto);
+    }
     
     @Put(':id')
     updateagenda(@Param('id') id: string, @Body() agentUpdate: PospectDto) {

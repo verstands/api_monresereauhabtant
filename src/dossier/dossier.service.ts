@@ -116,6 +116,37 @@ export class DossierService {
       });
     }
 
+    async findProspectsByRoleAdmin(paginationdto: PaginationDto) {
+      return this.prismaservice.pospects.findMany({
+        where: {
+          statutp: {
+            etape: {
+              CatgorieRole: {
+                
+              },
+            },
+          },
+          statuslead : "1",
+        },
+        include: {
+          produitpospect : true,
+          capagnepospect : true,
+          statutp: {
+            include: {
+              etape: true, 
+              catworkflow: {
+                include: {
+                  
+                },
+              },
+            },
+          },
+        },
+        skip: Number(paginationdto.skip), 
+        take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,
+      });
+    }
+
 
     async getIdOneProspects(id: string) {
       const data = await this.prismaservice.pospects.findFirst({

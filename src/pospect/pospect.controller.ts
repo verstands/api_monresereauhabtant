@@ -76,6 +76,11 @@ export class PospectController {
     return this.roleservice.updateNRP({ id, idstatut });
   }
 
+  @Put('nrpdossier/:id/:idstatut')
+  updatenrpdossier(@Param('id') id: string, @Param('idstatut') idstatut: string) {
+    return this.roleservice.updateNRPDossier({ id, idstatut }); 
+  }
+
 
   @Put('rdv/:id')
   updaterdv(@Param('id') id: string) {

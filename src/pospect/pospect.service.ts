@@ -32,6 +32,7 @@ export class PospectService {
     const data = await this.prismaservice.pospects.findMany({
       where : {
         statuslead: "1", 
+        statusdossier: "0", 
       },
       orderBy: {
         "id": "desc"
@@ -61,6 +62,7 @@ export class PospectService {
         capagnepospect: true,
         produitpospect: true,
         statutp: true,
+        confirmateur : true
 
       }
     });
@@ -91,7 +93,7 @@ export class PospectService {
       where: {
         id_user: id,
         statuslead: "1",
-        statusdossier: "1" 
+        statusdossier: "0" 
       },
       orderBy: {
         "id": "desc"
@@ -110,10 +112,9 @@ export class PospectService {
   async getSuiviLeadDossierAgent({ id }: { id: string }) {
     const data = await this.prismaservice.pospects.findMany({
       where: {
-        id_user: id,
-        statuslead: {
-          not: "0"
-        },
+        id_confirmateur: id,
+        statuslead: "1",
+        statusdossier :"1"
       },
       orderBy: {
         "id": "desc"
@@ -296,6 +297,19 @@ export class PospectService {
       data: {
         status: idstatut,
         statuslead: '1',
+      },
+    });
+    return { message: 'prospect Ne repond pas', data: update };
+  }
+
+  async updateNRPDossier({ id, idstatut }: { id: string, idstatut: string }) {
+    const update = await this.prismaservice.pospects.update({
+      where: {
+        id,
+      },
+      data: {
+        status: idstatut,
+        statusdossier: '1',
       },
     });
     return { message: 'prospect Ne repond pas', data: update };
