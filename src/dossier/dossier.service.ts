@@ -131,6 +131,7 @@ export class DossierService {
         include: {
           produitpospect : true,
           capagnepospect : true,
+          agentpospect : true,
           statutp: {
             include: {
               etape: true, 
@@ -141,6 +142,9 @@ export class DossierService {
               },
             },
           },
+        },
+        orderBy : {
+          id : "desc"
         },
         skip: Number(paginationdto.skip), 
         take: Number(paginationdto.limit) ?? DEFAULT_PAGE_SIZE,

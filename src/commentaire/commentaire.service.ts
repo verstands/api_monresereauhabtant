@@ -10,8 +10,7 @@ export class CommentaireService {
         const { id_user, id_pospect } = params;
         const data = await this.prismaservice.commentaires.findMany({
         where: {
-            id_user: id_user,
-            id_prospect: id_pospect,
+            id_prospect : id_pospect
         },
         orderBy: {
             id: 'desc',
